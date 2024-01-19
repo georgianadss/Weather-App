@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      userNameControl: new FormControl(),
-      passwordControl: new FormControl() 
+      userNameControl: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      passwordControl: new FormControl('', [Validators.required, Validators.minLength(5)]) 
     })
+
+    this.formGroup.updateValueAndValidity();
   }
 
   onSubmit() {
