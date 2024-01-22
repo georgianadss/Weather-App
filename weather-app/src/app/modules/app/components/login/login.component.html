@@ -16,7 +16,15 @@
         </div>
         <div class="d-flex flex-column">
             <label for="password">Password</label>
-            <input [formControl]="passwordControl" id="password" type="password">
+            <input 
+            [formControl]="passwordControl" 
+            id="password" type="password"
+            required="required"
+            [class.errors]="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
+            <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)" class="alert">
+                <div *ngIf="passwordControl.errors?.['required']">Password is required</div>
+                <div *ngIf="passwordControl.errors?.['minlength']">Password must be at leat 5 characters long</div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid">Submit</button>
     </form>
