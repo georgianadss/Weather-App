@@ -1,12 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ FormsModule, ReactiveFormsModule ]
+  imports: [ FormsModule, ReactiveFormsModule, CommonModule ]
 })
 export class LoginComponent implements OnInit {
   public formGroup!: FormGroup;
@@ -29,6 +30,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.formGroup.invalid) {
+      return;
+    }
+
     console.log(this.formGroup.value);
   }
 }

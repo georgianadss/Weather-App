@@ -4,6 +4,11 @@
         <div class="d-flex flex-column">
              <label for="userName">Name</label>
              <input [formControl]="userNameControl" id="userName" type="text" required="required">
+             <div *ngIf="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched)"
+                class="alert">
+                <div *ngIf="userNameControl.errors?.['required']">Name is required</div>
+                <div *ngIf="userNameControl.errors?.['minlength']">Name must be at least 5 characters long</div>
+             </div>
         </div>
         <div class="d-flex flex-column">
             <label for="password">Password</label>
