@@ -1,11 +1,15 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center login-form">
     <form [formGroup]="formGroup" class="m-2" (ngSubmit)="onSubmit()">
         <h2>Login</h2>
         <div class="d-flex flex-column">
              <label for="userName">Name</label>
-             <input [formControl]="userNameControl" id="userName" type="text" required="required">
+             <input 
+             [formControl]="userNameControl" 
+             id="userName" type="text" 
+             required="required"
+             [class.errors]="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched)">
              <div *ngIf="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched)"
-                class="alert">
+                class="alert p-0">
                 <div *ngIf="userNameControl.errors?.['required']">Name is required</div>
                 <div *ngIf="userNameControl.errors?.['minlength']">Name must be at least 5 characters long</div>
              </div>
