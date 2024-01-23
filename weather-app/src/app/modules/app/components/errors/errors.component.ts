@@ -40,6 +40,4 @@ export class ErrorsComponent implements ControlValueAccessor  {
 
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
-
-
 }

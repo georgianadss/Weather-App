@@ -8,7 +8,7 @@
              id="userName" type="text" 
              required="required"
              [class.errors]="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched)">
-             <app-errors [formControl]="userNameControl" [requiredMessage]="'Name is required'" [minLengthMessage]="'Name should be at least {{ MIN_LENGTH }} characters'"></app-errors>
+             <app-errors [formControl]="userNameControl" [requiredMessage]="'Name is required'" [minLengthMessage]="'Name should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
         <div class="d-flex flex-column">
             <label for="password">Password</label>
@@ -18,7 +18,7 @@
             required="required"
             [class.errors]="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
             <app-errors [formControl]="passwordControl" 
-            [requiredMessage]="'Password is required'" [minLengthMessage]="'Password should be at least {{ MIN_LENGTH }} characters'"></app-errors>
+            [requiredMessage]="'Password is required'" [minLengthMessage]="'Password should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
         <button type="submit" class="btn btn-primary mt-2" [disabled]="formGroup.invalid">Submit</button>
     </form>
