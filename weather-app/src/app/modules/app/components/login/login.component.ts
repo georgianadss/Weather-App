@@ -12,6 +12,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, }
 export class LoginComponent implements OnInit {
   public formGroup!: FormGroup;
 
+  public readonly MIN_LENGTH: number = 5;
+
   get userNameControl() {
     return this.formGroup.get('userNameControl') as FormControl;
   }
@@ -22,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      userNameControl: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      passwordControl: new FormControl('', [Validators.required, Validators.minLength(5)]) 
+      userNameControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]),
+      passwordControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]) 
     })
 
     this.formGroup.updateValueAndValidity();
