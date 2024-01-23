@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
+import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
+
+interface LoginData {
+  userNameControl: FormControl<string | null>;
+  passwordControl: FormControl<string | null>;
+}
 
 @Component({
   selector: 'app-login',
@@ -10,25 +15,23 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, }
   imports: [ FormsModule, ReactiveFormsModule, CommonModule ]
 })
 export class LoginComponent implements OnInit {
-  public formGroup!: FormGroup;
+  public formGroup!: FormGroup<LoginData>;
 
   public readonly MIN_LENGTH: number = 5;
 
   get userNameControl() {
-    return this.formGroup.get('userNameControl') as FormControl;
+    return this.formGroup.controls.userNameControl;
   }
 
   get passwordControl() {
-    return this.formGroup.get('passwordControl') as FormControl;
+    return this.formGroup.controls.passwordControl;
   }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       userNameControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]),
-      passwordControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]) 
+      passwordControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]),
     })
-
-    this.formGroup.updateValueAndValidity();
   }
 
   onSubmit() {
