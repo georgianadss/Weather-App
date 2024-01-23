@@ -1,5 +1,7 @@
-<div *ngIf="control.invalid && (control.dirty || control.touched)"
+<ng-container *ngIf="formControl">
+    <div *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)"
     class="alert p-0">
-    <div *ngIf="control.errors?.['required']">Name is required</div>
-    <div *ngIf="control.errors?.['minlength']">Name must be at least {{ MIN_LENGTH }} characters long</div>
+    <div *ngIf="formControl.errors?.['required']">Name is required</div>
+    <div *ngIf="formControl.errors?.['minlength']">Name must be at least {{ MIN_LENGTH }} characters long</div>
 </div>
+</ng-container>
