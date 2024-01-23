@@ -20,6 +20,9 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class ErrorsComponent implements ControlValueAccessor  {
   @Input() formControl!: FormControl;
+  @Input() requiredMessage!: string;
+  @Input() minLengthMessage!: string;
+
 
   value!: string;
 
@@ -38,7 +41,5 @@ export class ErrorsComponent implements ControlValueAccessor  {
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
-
-readonly MIN_LENGTH: number = 5;
 
 }
