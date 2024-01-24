@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './components/header/header.component';
-import { LoginComponent } from './components/login/login.component';
-import { ErrorsComponent } from './components/errors/errors.component';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './home/login/login.component';
+import { HomeComponent } from "./home/home.component";
+
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ErrorsComponent } from './components/errors/errors.component';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, HeaderComponent, LoginComponent, ErrorsComponent]
+    imports: [CommonModule, RouterModule, LoginComponent, HomeComponent]
 })
 export class AppComponent {
   title = 'weather-app';

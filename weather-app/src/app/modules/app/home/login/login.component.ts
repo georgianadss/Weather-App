@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
-import { ErrorsComponent } from '../errors/errors.component';
+import { ErrorsComponent } from '../../components/errors/errors.component';
 
 interface LoginData {
   userNameControl: FormControl<string | null>;

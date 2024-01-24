@@ -1,8 +1,10 @@
-import { Routes } from '@angular/router';
-import { HeaderComponent } from './components/header/header.component';
-import { ErrorsComponent } from './components/errors/errors.component';
+import { HeaderComponent } from './home/header/header.component';
+import { LoginComponent } from './home/login/login.component';
+import { Route, Routes } from '@angular/router';
 
-
-export const routes: Routes = [
-    { path: '', component: HeaderComponent, pathMatch: 'full', },
+export const APP_ROUTE: Route[] = [
+  { path: '', component: HeaderComponent },
+  { path: '', component: LoginComponent }
 ];
+
+export const route: Routes = APP_ROUTE;
