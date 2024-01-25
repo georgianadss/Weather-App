@@ -20,6 +20,9 @@
             <app-errors [formControl]="passwordControl" 
             [requiredMessage]="'Password is required'" [minLengthMessage]="'Password should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
-        <button type="submit" class="btn btn-primary mt-2" [disabled]="formGroup.invalid">Submit</button>
+        <button type="submit" 
+            class="btn btn-primary mt-2" 
+            [disabled]="formGroup.invalid"
+            [routerLink]="'./login'">Submit</button>
     </form>
 </div>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
 import { ErrorsComponent } from '../../components/errors/errors.component';
+import { RouterModule } from '@angular/router';
 
 interface LoginData {
   userNameControl: FormControl<string | null>;
@@ -13,7 +14,7 @@ interface LoginData {
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ FormsModule, ReactiveFormsModule, CommonModule, ErrorsComponent ]
+  imports: [ FormsModule, ReactiveFormsModule, CommonModule, ErrorsComponent, RouterModule ]
 })
 export class LoginComponent implements OnInit {
   public formGroup!: FormGroup<LoginData>;
