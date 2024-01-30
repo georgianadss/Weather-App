@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -10,7 +11,7 @@ import { RouterModule } from '@angular/router';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterModule]
+    imports: [CommonModule, RouterModule, HomeComponent]
 })
 export class AppComponent {
   title = 'weather-app';

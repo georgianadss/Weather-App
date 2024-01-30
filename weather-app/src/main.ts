@@ -8,4 +8,3 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(APP_ROUTE)],
 });
-  // .catch((err) => console.error(err));
