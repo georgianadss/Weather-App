@@ -1,39 +1,46 @@
 <app-header></app-header>
 <!-- TODO: Create a design to display Weather details -->
-<div class="container w-100">
-    <div class="title-container">
-        <h2>Current Weather</h2>
+<div class="container w-50 m-3 p-2">
+    <div class="title-container d-flex justify-content-between">
+        <h4 class="mb-0">Current Weather</h4>
         <div>
             <span>Current time:</span>
             <span>12:03</span>
         </div>
     </div>
     <div class="container-elements border d-flex justify-content-between">
-        <div class="d-flex flex-column">
-            <span><i class="bi bi-brightness-high-fill"></i></span>
-            <h3>Temperature</h3>
-            <div>
-                <span>Sunny</span>
-                <a href="#">More details</a>
+        <div class="d-flex flex-column m-2 col">
+            <div class="d-flex align-items-center">
+                <div class="px-1"><i class="bi bi-brightness-high"></i></div>
+                <div class="d-flex flex-column px-1">
+                    <span class="font-weight font-size-30">1</span>
+                    <span>RealFeel 3</span>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-left">
+                <div>Sunny</div>
+                <div class="more-details">
+                    <a href="#" class="font-weight">More details >></a>
+                </div>
             </div>
         </div>
-        <div class="d-flex flex-column">
-            <div>
+        <ul class="d-flex flex-column m-2 col list-unstyled">
+            <li class="d-flex align-items-center justify-content-between p-2 border-bottom">
                 <span>RealFeel Shade:</span>
                 <span>0 Grade</span>
-            </div>
-            <div>
+            </li>
+            <li class="d-flex align-items-center justify-content-between p-2 border-bottom">
                 <span>Wind:</span>
                 <span>WSW 9km/h</span>
-            </div>
-            <div>
+            </li>
+            <li class="d-flex align-items-center justify-content-between p-2 border-bottom">
                 <span>Wind Gusts:</span>
                 <span>10km/h</span>
-            </div>    
-            <div>
+            </li>    
+            <li class="d-flex align-items-center justify-content-between p-2">
                 <span>Air quality:</span>
                 <span>Poor</span>
-            </div>         
-        </div>
+            </li>         
+        </ul>
     </div>
 </div>
