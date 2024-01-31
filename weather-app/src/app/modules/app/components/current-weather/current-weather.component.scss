@@ -1,0 +1,18 @@
+@import 'variables.scss';
+@import 'typography';
+
+.current-weather {
+    .bi-brightness-high {
+        color: $sun-orange;
+        font-size: 70px;
+    }
+
+    .more-details a {
+        color: $body-grey;
+        font-size: 15px;
+    }
+
+    .orange {
+        color: $sun-orange;
+    }
+}
