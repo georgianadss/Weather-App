@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
-import { ErrorsComponent } from '../../components/errors/errors.component';
+import { ErrorsComponent } from '../errors/errors.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 
