@@ -1,13 +1,13 @@
-import { HeaderComponent } from './home/header/header.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './home/login/login.component';
-import { Route, Routes } from '@angular/router';
+import { Route } from '@angular/router';
 
 export const APP_ROUTE: Route[] = [
-  { path: '', 
-  component: HomeComponent, 
-  loadChildren: () => import('./home/home.route')
-},
+    {
+    path: '',
+    loadChildren: () => import('./home/home.route').then(r => r.HOME_ROUTE),
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent),
+    },
 ];
-
-export const route: Routes = APP_ROUTE;

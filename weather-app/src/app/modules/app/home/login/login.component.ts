@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
 import { ErrorsComponent } from '../../components/errors/errors.component';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 interface LoginData {
   userNameControl: FormControl<string | null>;
@@ -14,7 +15,7 @@ interface LoginData {
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ FormsModule, ReactiveFormsModule, CommonModule, ErrorsComponent, RouterModule ]
+  imports: [ FormsModule, ReactiveFormsModule, CommonModule, ErrorsComponent, RouterModule, HeaderComponent,]
 })
 export class LoginComponent implements OnInit {
   public formGroup!: FormGroup<LoginData>;

@@ -2,8 +2,12 @@
 
 .header {
     background-color: $light-white;
-    button {
-        border: none;
+   a {
+    color: black;
+    text-decoration: none;
+   }
+
+    .active {
+        color: blue;
     }
 }
-
