@@ -1,104 +1,26 @@
-<!-- <div class="container current-weather w-50 m-3 p-2">
-    <div class="title-container d-flex justify-content-between align-items-center">
-        <h4 class="mb-0">Current Weather</h4>
-        <div class="d-flex">
-            <div>Current time:</div>
-            <div>12:03</div>
-        </div>
-    </div>
-    <div class="container-elements border d-flex justify-content-between">
-        <div class="d-flex flex-column m-2 col">
-            <div class="d-flex align-items-center">
-                <div class="px-1"><i class="bi bi-brightness-high"></i></div>
-                <div class="d-flex flex-column px-1">
-                    <span class="font-weight font-size-30">1</span>
-                    <span>RealFeel 3</span>
-                </div>
-            </div>
-            <div class="d-flex flex-column align-items-left">
-                <div>Sunny</div>
-                <div class="more-details">
-                    <a href="#" class="font-weight">More details >></a>
-                </div>
-            </div>
-        </div>
-        <ul class="d-flex flex-column m-2 col list-unstyled">
-            <li class="d-flex align-items-center justify-content-between p-2 border-bottom">
-                <span>RealFeel Shade:</span>
-                <span class="font-weight">0 Grade</span>
-            </li>
-            <li class="d-flex align-items-center justify-content-between p-2 border-bottom">
-                <span>Wind:</span>
-                <span class="font-weight">WSW 9km/h</span>
-            </li>
-            <li class="d-flex align-items-center justify-content-between p-2 border-bottom">
-                <span>Wind Gusts:</span>
-                <span class="font-weight">10km/h</span>
-            </li>
-            <li class="d-flex align-items-center justify-content-between p-2">
-                <span>Air quality:</span>
-                <span class="font-weight orange">Poor</span>
-            </li>
-        </ul>
-    </div>
-</div> -->
-<!-- <div>
-    <h5> This car is running: </h5>
-    <div *ngFor="let car of cars">
-        if car is run, we need to create a h1 with This car is running -->    
-        <!-- <div *ngIf="car.run" [ngStyle]="{'background-color': car.color}">
-            {{ car.name }}
-        </div> -->
-    <!-- </div>
-    <h5> This car is not running: </h5>
-    <div *ngFor="let car of cars">
-        <div *ngIf="!car.run">
-            {{ car.name }}
-        </div>
-    </div>
-</div> -->
-<!-- <div class="d-flex flex-column">
-    <ul>
-      <li *ngFor="let region of regions">
-        {{ region.LocalizedName }}
-      </li>
-    </ul>
-  </div> -->
-
-<!-- <div class="location-list">
-    <ul class="d-flex flex-column list-unstyled list-inline p-2">
-        <li class="p-2" *ngFor="let topCityList of topCitiesList.slice(0, 3)">
-            <h5>Country details</h5>
-            {{ topCityList?.Country?.LocalizedName }}
-           {{ topCityList?.TimeZone?.GmtOffset }}
-           {{ topCityList.Region.LocalizedName}}
-          
-        </li>
-    </ul>
-</div> -->
-
 <div class="location-list d-flex flex-column m-1 p-1 w-50">
     <h1 class="text-center">Country details</h1>
     <ul class="list-unstyled border">
-        <li class="p-3" [class.border-bottom]="!last" *ngFor="let topCityList of topCitiesList.slice(0, 10); let last = last"> 
-        <div class="d-flex align-items-center">
-            <h5 class="fw-normal mb-0 me-2">Country name:</h5>
-            <span class="fw-bold"> 
-                {{ topCityList?.Country?.LocalizedName }} 
-            </span>
-        </div>
-        <div class="d-flex align-items-center">
-            <h5 class="fw-normal mb-0 me-2">GMT</h5>
-            <span class="fw-bold"> 
-                {{ topCityList?.TimeZone?.GmtOffset }}
-            </span>
-        </div>
-        <div class="d-flex align-items-center">
-            <h5 class="fw-normal mb-0 me-2">Continent:</h5>
-            <span class="fw-bold"> 
-                {{ topCityList?.Region?.LocalizedName }}
-            </span>
-        </div>
+        <li class="p-3" [class.border-bottom]="!last"
+            *ngFor="let topCityList of topCitiesList.slice(0, 10); let last = last">
+            <div class="d-flex align-items-center">
+                <h5 class="fw-normal mb-0 me-2">Country name:</h5>
+                <span class="fw-bold">
+                    {{ topCityList?.Country?.LocalizedName }}
+                </span>
+            </div>
+            <div class="d-flex align-items-center">
+                <h5 class="fw-normal mb-0 me-2">GMT</h5>
+                <span class="fw-bold">
+                    {{ topCityList?.TimeZone?.GmtOffset }}
+                </span>
+            </div>
+            <div class="d-flex align-items-center">
+                <h5 class="fw-normal mb-0 me-2">Continent:</h5>
+                <span class="fw-bold">
+                    {{ topCityList?.Region?.LocalizedName }}
+                </span>
+            </div>
         </li>
     </ul>
 </div>
