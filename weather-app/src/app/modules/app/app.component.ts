@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocationsService } from '../../services/locations.service';
 
 
+
 @Component({
     selector: 'app-root',
     standalone: true,
