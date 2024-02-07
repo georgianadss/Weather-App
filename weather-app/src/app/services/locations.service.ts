@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CurrentCondition } from '../modules/models/current-conditions';
 
 export interface TopCityList {
    Key: number,
@@ -37,4 +38,8 @@ export class LocationsService {
     // const headers = new HttpHeaders().set('apiKey', this.API_KEY);
     return this.http.get<TopCityList[]>(`${this.apiUrl}/locations/v1/topcities/50?apikey=${this.API_KEY}`);
 }
+
+  getCurrentCondition(id: number): Observable<CurrentCondition[]> {
+    return this.http.get<CurrentCondition[]>(`${this.apiUrl}/currentconditions/v1/${id}?apikey=${this.API_KEY}`);
+  }
 }
