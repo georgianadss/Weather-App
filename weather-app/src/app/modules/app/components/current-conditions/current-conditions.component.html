@@ -2,13 +2,19 @@
 	<div class="col">
 		<div ngbDropdown class="d-inline-block">
 			<button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-				Toggle dropdown
+				Select City
 			</button>
 			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-				<button ngbDropdownItem *ngFor="let topCity of topCities" (click)="selectCity(topCity.Key)">
+				<button ngbDropdownItem *ngFor="let topCity of topCities" 
+                (click)="selectCity(topCity.Key, topCity.Country.LocalizedName)">
                 {{topCity.Country.LocalizedName}}
                 </button>
 			</div>
 		</div>
 	</div>
+</div>
+<div>
+    <div *ngFor="let currentCondition of currentConditions">
+        <h5>{{cityName}}</h5>
+    </div>
 </div>
