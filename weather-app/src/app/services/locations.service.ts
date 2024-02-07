@@ -39,17 +39,8 @@ export class LocationsService {
 
   constructor(private http: HttpClient) { };
 
-  // getRegionCode(): Observable<Region[]> {
-  //   const headers = new HttpHeaders().set('apiKey', this.API_KEY);
-  //   return this.http.get<Region[]>(`${this.apiUrl}/locations/v1/regions?apikey=${this.API_KEY}`);
-  // }
-
-  // getCountryList(countryId: string): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/locations/v1/countries/${countryId}?apikey=${this.API_KEY}`);
-  // }
-
   getTopCityList(): Observable<TopCityList[]>{
-    const headers = new HttpHeaders().set('apiKey', this.API_KEY);
+    // const headers = new HttpHeaders().set('apiKey', this.API_KEY);
     return this.http.get<TopCityList[]>(`${this.apiUrl}/locations/v1/topcities/50?apikey=${this.API_KEY}`);
 }
 }
