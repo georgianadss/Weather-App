@@ -8,6 +8,11 @@ import { FetchCurrentConditions } from '../../../state/app.actions';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
+enum TemperatureType {
+  Imperial = 'imperial',
+  Metric = 'metric'
+}
+
 @Component({
   selector: 'app-current-conditions',
   standalone: true,
@@ -20,9 +25,10 @@ export class CurrentConditionsComponent implements OnInit{
   public currentConditions!: CurrentCondition[];
   public topCities!: TopCityList[];
   public cityName!: string;
-  // TODO: remove this after we create the dropdown 
- readonly ID: number = 264120;
+  public activeTab: string = TemperatureType.Imperial;
+
  readonly unsubscribe = new Subject<void>();
+ readonly TemperatureType = TemperatureType;
 
  constructor(private locationService: LocationsService, 
             private store: Store,) {
@@ -42,5 +48,10 @@ export class CurrentConditionsComponent implements OnInit{
  selectCity(key: number, cityName: string) {
   this.cityName = cityName;
   this.store.dispatch(new FetchCurrentConditions(key));
+ }
+
+ changeTemperatureTab(activeTab: string) {
+  console.log('activetab', activeTab);
+  this.activeTab = activeTab;
  }
 }
