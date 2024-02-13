@@ -8,6 +8,7 @@ import { tap } from "rxjs";
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
     currentConditions?: CurrentCondition[];
+
 };
 
 @State<AppStateModel>({
@@ -19,6 +20,7 @@ export interface AppStateModel {
 
 @Injectable()
 export class AppState {
+    
     constructor(private locationService: LocationsService,) {}
 
 @Selector()
@@ -32,13 +34,12 @@ fetchCurrentConditions(
     {key}: FetchCurrentConditions,
 ) {
     return this.locationService.getCurrentCondition(key).pipe(tap({
-        next: (response) => {
+        next: (currentConditions) => {
             patchState({
-                currentConditions: response,
-            }) 
+                currentConditions
+            })
         },
         error: (e) => {console.error(e)}
     }))
 }
-
 }

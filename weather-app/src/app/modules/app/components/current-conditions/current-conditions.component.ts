@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { LocationsService, TopCityList } from '../../../../services/locations.service';
 import { CurrentCondition } from '../../../models/current-conditions';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { FetchCurrentConditions } from '../../../state/app.actions';
+import { AppState } from '../../../state/app.state';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-current-conditions',
@@ -14,11 +16,13 @@ import { FetchCurrentConditions } from '../../../state/app.actions';
   styleUrls: ['./current-conditions.component.scss']
 })
 export class CurrentConditionsComponent implements OnInit{
+  @Select(AppState.currentConditions) currentConditions$!: Observable<CurrentCondition[]>
   public currentConditions!: CurrentCondition[];
   public topCities!: TopCityList[];
   public cityName!: string;
   // TODO: remove this after we create the dropdown 
  readonly ID: number = 264120;
+ readonly unsubscribe = new Subject<void>();
 
  constructor(private locationService: LocationsService, 
             private store: Store,) {
@@ -28,7 +32,10 @@ export class CurrentConditionsComponent implements OnInit{
    this.locationService.getTopCityList().subscribe((topCities) => {
     if(!topCities) return;
     this.topCities = topCities;
-   })   
+   })
+   this.currentConditions$.pipe(takeUntil(this.unsubscribe)).subscribe((currentConditions) => {
+    this.currentConditions = currentConditions;
+   })
  }
 
  

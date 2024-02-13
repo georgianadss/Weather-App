@@ -9,6 +9,6 @@ import { AppState } from '../state/app.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(APP_ROUTE), provideHttpClient(withFetch()) ,provideClientHydration(),
-  importProvidersFrom(NgxsModule.forRoot([AppState]))]
+  importProvidersFrom(NgxsModule.forRoot([AppState])),]
   
 };
