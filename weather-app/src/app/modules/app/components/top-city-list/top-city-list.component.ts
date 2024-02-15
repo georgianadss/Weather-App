@@ -5,7 +5,7 @@ import { LocationsService, TopCityList } from '../../../../services/locations.se
 @Component({
   selector: 'app-top-city-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,],
   templateUrl: './top-city-list.component.html',
   styleUrls: ['./top-city-list.component.scss']
 })
