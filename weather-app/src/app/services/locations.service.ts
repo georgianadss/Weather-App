@@ -35,6 +35,7 @@ export class LocationsService {
   constructor(private http: HttpClient) { };
 
   getTopCityList(): Observable<TopCityList[]>{
+    // const headers = new HttpHeaders().set('apiKey', this.API_KEY);
     return this.http.get<TopCityList[]>(`${this.apiUrl}/locations/v1/topcities/50?apikey=${this.API_KEY}`);
 }
 

@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TopCityListComponent } from '../components/top-city-list/top-city-list.component';
 import { CurrentConditionsComponent } from '../components/current-conditions/current-conditions.component';
 import { ConfigService } from '../../../services/config.service';
-import { httpInterceptorProviders } from '../../../interceptors';
+
 
 
 @Component({

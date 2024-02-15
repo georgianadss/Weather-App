@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { LocationsService, TopCityList } from '../../../../services/locations.service';
+// import { LocationsService, TopCityList } from '../../../../services/locations.service';
 
 
 @Component({
