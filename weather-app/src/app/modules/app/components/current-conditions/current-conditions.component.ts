@@ -20,38 +20,38 @@ enum TemperatureType {
   templateUrl: './current-conditions.component.html',
   styleUrls: ['./current-conditions.component.scss']
 })
-export class CurrentConditionsComponent implements OnInit{
+export class CurrentConditionsComponent implements OnInit {
   @Select(AppState.currentConditions) currentConditions$!: Observable<CurrentCondition[]>
   public currentConditions!: CurrentCondition[];
   public topCities!: TopCityList[];
   public cityName!: string;
   public activeTab: string = TemperatureType.Imperial;
 
- readonly unsubscribe = new Subject<void>();
- readonly TemperatureType = TemperatureType;
+  readonly unsubscribe = new Subject<void>();
+  readonly TemperatureType = TemperatureType;
 
- constructor(private locationService: LocationsService, 
-            private store: Store,) {
- }
+  constructor(private locationService: LocationsService,
+    private store: Store,) {
+  }
 
- ngOnInit(): void {
-   this.locationService.getTopCityList().subscribe((topCities) => {
-    if(!topCities) return;
-    this.topCities = topCities;
-   })
-   this.currentConditions$.pipe(takeUntil(this.unsubscribe)).subscribe((currentConditions) => {
-    this.currentConditions = currentConditions;
-   })
- }
+  ngOnInit(): void {
+    this.locationService.getTopCityList().subscribe((topCities) => {
+      if (!topCities) return;
+      this.topCities = topCities;
+    })
+    this.currentConditions$.pipe(takeUntil(this.unsubscribe)).subscribe((currentConditions) => {
+      this.currentConditions = currentConditions;
+    })
+  }
 
- 
- selectCity(key: number, cityName: string) {
-  this.cityName = cityName;
-  this.store.dispatch(new FetchCurrentConditions(key));
- }
 
- changeTemperatureTab(activeTab: string) {
-  console.log('activetab', activeTab);
-  this.activeTab = activeTab;
- }
+  selectCity(key: number, cityName: string) {
+    this.cityName = cityName;
+    this.store.dispatch(new FetchCurrentConditions(key));
+  }
+
+  changeTemperatureTab(activeTab: string) {
+    console.log('activetab', activeTab);
+    this.activeTab = activeTab;
+  }
 }

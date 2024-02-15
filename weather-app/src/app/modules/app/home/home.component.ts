@@ -32,4 +32,5 @@ import { httpInterceptorProviders } from '../../../interceptors';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+
 }

@@ -29,8 +29,7 @@
 			<h5>Temperature</h5>
 		</li>
 	</ul>
-	<ul class="d-flex border m-0 p-3 list-unstyled" 
-		*ngFor="let currentCondition of currentConditions">
+	<ul class="d-flex border m-0 p-3 list-unstyled" *ngFor="let currentCondition of currentConditions">
 		<li class="d-flex align-items-center col">
 			<div> {{ currentCondition.EpochTime | number: '1.0-2' }} </div>
 		</li>
@@ -41,17 +40,15 @@
 			<div> {{ currentCondition.WeatherText }} </div>
 		</li>
 		<li class="d-flex align-items-center col">
-			<button (click)="changeTemperatureTab(TemperatureType.Imperial)"
-				class="btn btn-outline-primary me-2"
+			<button (click)="changeTemperatureTab(TemperatureType.Imperial)" class="btn btn-outline-primary me-2"
 				[class.active]="activeTab === TemperatureType.Imperial">Imperial</button>
-			<button (click)="changeTemperatureTab(TemperatureType.Metric)"
-				class="btn btn-outline-primary"
+			<button (click)="changeTemperatureTab(TemperatureType.Metric)" class="btn btn-outline-primary"
 				[class.active]="activeTab === TemperatureType.Metric">Metric</button>
-			<div *ngIf="activeTab === TemperatureType.Imperial">
+			<div *ngIf="activeTab === TemperatureType.Imperial" class="m-1">
 				{{ currentCondition.Temperature.Imperial.UnitType }}
 				{{ currentCondition.Temperature.Imperial.Unit }}
 			</div>
-			<div *ngIf="activeTab === TemperatureType.Metric">
+			<div *ngIf="activeTab === TemperatureType.Metric" class="m-1">
 				{{ currentCondition.Temperature.Metric.UnitType }}
 				{{ currentCondition.Temperature.Metric.Unit }}
 			</div>
