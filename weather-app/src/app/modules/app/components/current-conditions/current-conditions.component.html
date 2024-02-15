@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row m-2">
 	<div class="col">
 		<div ngbDropdown class="d-inline-block">
 			<button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
@@ -13,28 +13,39 @@
 		</div>
 	</div>
 </div>
-<div class="weather-container">
+<div class="weather-container m-2 p-2">
 	<h5>{{cityName}}</h5>
-	<ul *ngFor="let currentCondition of currentConditions">
-		<li>
-			<h5>Epoch Time:</h5>
+	<ul class="d-flex border m-0 p-3">
+		<li class="d-flex align-items-center col">
+			<h5>Epoch Time</h5>
+		</li>
+		<li class="d-flex align-items-center col">
+			<h5>Local Time</h5>
+		</li>
+		<li class="d-flex align-items-center col">
+			<h5>Weather</h5>
+		</li>
+		<li class="d-flex align-items-center col">
+			<h5>Temperature</h5>
+		</li>
+	</ul>
+	<ul class="d-flex border m-0 p-3 list-unstyled" 
+		*ngFor="let currentCondition of currentConditions">
+		<li class="d-flex align-items-center col">
 			<div> {{ currentCondition.EpochTime | number: '1.0-2' }} </div>
 		</li>
-		<li>
-			<h5>Local Time:</h5>
+		<li class="d-flex align-items-center col">
 			<div> {{ currentCondition.LocalObservationDateTime | date: 'medium' }} </div>
 		</li>
-		<li>
-			<h5>Weather:</h5>
+		<li class="d-flex align-items-center col">
 			<div> {{ currentCondition.WeatherText }} </div>
 		</li>
-		<li>
-			<h5>Temperature:</h5>
+		<li class="d-flex align-items-center col">
 			<button (click)="changeTemperatureTab(TemperatureType.Imperial)"
-				class="btn"
+				class="btn btn-outline-primary me-2"
 				[class.active]="activeTab === TemperatureType.Imperial">Imperial</button>
 			<button (click)="changeTemperatureTab(TemperatureType.Metric)"
-				class="btn"
+				class="btn btn-outline-primary"
 				[class.active]="activeTab === TemperatureType.Metric">Metric</button>
 			<div *ngIf="activeTab === TemperatureType.Imperial">
 				{{ currentCondition.Temperature.Imperial.UnitType }}

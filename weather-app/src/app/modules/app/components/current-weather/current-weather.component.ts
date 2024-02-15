@@ -11,12 +11,14 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./current-weather.component.scss']
 })
 export class CurrentWeatherComponent implements OnInit {
+
   // public topCitiesList: TopCityList[] = [];
+  // locationService: any;
 
   constructor() { }
 
   ngOnInit(): void {
-    // this.locationService.getTopCityList().subscribe((topCitiesList) => {
+    // this.locationService.getTopCityList().subscribe((topCitiesList: TopCityList[]) => {
     //   this.topCitiesList = topCitiesList;
     //   console.log(topCitiesList);
     // })
