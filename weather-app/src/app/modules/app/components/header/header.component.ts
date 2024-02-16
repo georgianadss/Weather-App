@@ -11,5 +11,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
+  public mockedCityName: string = 'London, United Kingdom, 11C';
 }

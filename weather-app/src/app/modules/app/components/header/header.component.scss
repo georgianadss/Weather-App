@@ -1,12 +1,17 @@
 @import 'variables.scss';
 
 .header {
-    background-color: $light-white;
+    background-color: $dark-background;
    a {
-    color: black;
+    color: $light-white;
     text-decoration: none;
    }
    .active {
     color: blue;
    }
+   
+   h5, span {
+    color: $light-white;
+   }
+
 }
