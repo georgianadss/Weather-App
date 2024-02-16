@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocationsService, TopCityList } from '../../../../services/locations.service';
+import { LocationsService } from '../../../../services/locations.service';
 import { CurrentCondition } from '../../../models/current-conditions';
+import { TopCityList } from '../../../models/top-city-list';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
 import { FetchCurrentConditions } from '../../../state/app.actions';
@@ -24,6 +25,7 @@ export class CurrentConditionsComponent implements OnInit {
   @Select(AppState.currentConditions) currentConditions$!: Observable<CurrentCondition[]>
   public currentConditions!: CurrentCondition[];
   public topCities!: TopCityList[];
+  public topCitiesList!: TopCityList[];
   public cityName!: string;
   public activeTab: string = TemperatureType.Imperial;
 
@@ -42,6 +44,11 @@ export class CurrentConditionsComponent implements OnInit {
     this.currentConditions$.pipe(takeUntil(this.unsubscribe)).subscribe((currentConditions) => {
       this.currentConditions = currentConditions;
     })
+
+    this.locationService.getTopCityList().subscribe((topCitiesList: TopCityList[]) => {
+      this.topCitiesList = topCitiesList;
+      // console.log(topCitiesList);
+    })
   }
 
 
@@ -54,4 +61,5 @@ export class CurrentConditionsComponent implements OnInit {
     console.log('activetab', activeTab);
     this.activeTab = activeTab;
   }
+  
 }

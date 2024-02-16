@@ -1,3 +1,6 @@
+@import 'variables.scss';
+@import 'typography';
+
 .weather-container {
     .active {
         // background-color: blue;
@@ -9,4 +12,14 @@
         margin: 0 !important;
     }
 
+}
+
+.location-list {
+    h5 {
+        font-size: 1.12rem;
+    }
+
+    li {
+        font-size: 0.93rem;
+    }
 }
