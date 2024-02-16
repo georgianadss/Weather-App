@@ -3,6 +3,7 @@
         [formControl]="searchControl"
         type="search" 
         id="nav-search" 
-        name="nav-search">
+        name="nav-search"
+        (keyup)="searchInput($any($event.target).value)">
     <button class="btn btn-primary ms-2">Search</button>
 </form>

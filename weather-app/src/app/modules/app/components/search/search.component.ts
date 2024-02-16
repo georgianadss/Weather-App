@@ -27,4 +27,8 @@ export class SearchComponent implements OnInit{
       searchControl: new FormControl(''),
     })
   }
+
+  searchInput(controlValue: any) {
+    console.log(controlValue);
+  }
 }
