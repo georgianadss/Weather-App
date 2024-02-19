@@ -3,3 +3,9 @@ export class FetchCurrentConditions {
     
     constructor(public key: number) {}
 }
+
+export class FetchCities {
+    static readonly type = '[App] FetchCities';
+
+    constructor(public city: string) {}
+}

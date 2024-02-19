@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Store } from '@ngxs/store';
+import { FetchCities } from '../../../state/app.actions';
 
 interface FormGroupData {
   searchControl: FormControl;
@@ -16,7 +18,7 @@ interface FormGroupData {
 export class SearchComponent implements OnInit{
   public formGroup!: FormGroup<FormGroupData>;
 
-  constructor() {}
+  constructor(private store: Store,) {}
 
   get searchControl() {
     return this.formGroup.controls.searchControl;
@@ -28,7 +30,7 @@ export class SearchComponent implements OnInit{
     })
   }
 
-  searchInput(controlValue: any) {
-    console.log(controlValue);
+  searchInput(city: string) {
+    this.store.dispatch(new FetchCities(city))
   }
 }

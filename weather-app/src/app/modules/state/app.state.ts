@@ -1,13 +1,16 @@
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { LocationsService, TopCityList } from "../../services/locations.service";
+import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { FetchCurrentConditions } from "./app.actions";
+import { FetchCities, FetchCurrentConditions } from "./app.actions";
 import { tap } from "rxjs";
+import { TopCityList } from "../models/top-city-list";
+import { CityData } from "../models/city-data";
 
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
     currentConditions?: CurrentCondition[];
+    cities?: CityData[];
 
 };
 
@@ -28,6 +31,11 @@ static currentConditions(state: AppStateModel) {
     return state.currentConditions;
 }
 
+@Selector()
+static cities(state: AppStateModel) {
+    return state.cities;
+}
+
 @Action(FetchCurrentConditions) 
 fetchCurrentConditions(
     {patchState}: StateContext<AppStateModel>,
@@ -37,6 +45,22 @@ fetchCurrentConditions(
         next: (currentConditions) => {
             patchState({
                 currentConditions
+            })
+        },
+        error: (e) => {console.error(e)}
+    }))
+}
+
+@Action(FetchCities) 
+    fetchCities(
+    {patchState}: StateContext<AppStateModel>,
+    {city}: FetchCities,
+) {
+    return this.locationService.getCityData(city).pipe(tap({
+        next: (cities) => {
+            console.log(cities);
+            patchState({
+                cities,
             })
         },
         error: (e) => {console.error(e)}
