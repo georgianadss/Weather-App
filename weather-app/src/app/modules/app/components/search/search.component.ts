@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { FetchCities } from '../../../state/app.actions';
+import { SuggestionsComponent } from '../suggestions/suggestions.component';
 
 interface FormGroupData {
   searchControl: FormControl;
@@ -11,7 +12,7 @@ interface FormGroupData {
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,],
+  imports: [CommonModule, ReactiveFormsModule, SuggestionsComponent],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
