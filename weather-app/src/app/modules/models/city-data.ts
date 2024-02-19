@@ -1,4 +1,4 @@
-export interface CityData {
+export interface CityDetails {
       Key: string,
       Type: string,
       Rank: number,
@@ -61,3 +61,19 @@ export interface CityData {
       ],
       DataSets: string[]
     }
+
+    export interface CityData   {
+        Version: number,
+        Key: string,
+        Type: string,
+        Rank: number,
+        LocalizedName: string,
+        Country: {
+          ID: string,
+          LocalizedName: string
+        },
+        AdministrativeArea: {
+          ID: string,
+          LocalizedName: string
+        }
+      }
