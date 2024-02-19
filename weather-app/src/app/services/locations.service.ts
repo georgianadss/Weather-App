@@ -4,27 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { CurrentCondition } from '../modules/models/current-conditions';
 import { TopCityList } from '../modules/models/top-city-list';
 
-// export interface TopCityList {
-//    Key: number,
-//    Region: {
-//     ID: string,
-//     LocalizedName: string,
-//    },
-//    Country: {
-//     ID: string,
-//     LocalizedName: string,
-//    },
-//    TimeZone: {
-//     Code: string,
-//     Name: string,
-//     GmtOffset: number,
-//   },
-//   GeoPosition: {
-//     Latitude: number,
-//     Longitude: number,
-//   }
-// }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +22,6 @@ export class LocationsService {
   getCurrentCondition(id: number): Observable<CurrentCondition[]> {
     return this.http.get<CurrentCondition[]>(`${this.apiUrl}/currentconditions/v1/${id}?apikey=${this.API_KEY}`);
   }
+  
 }
 export { TopCityList };
-
