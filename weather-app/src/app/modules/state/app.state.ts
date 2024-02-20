@@ -5,12 +5,12 @@ import { CurrentCondition } from "../models/current-conditions";
 import { FetchCities, FetchCurrentConditions } from "./app.actions";
 import { tap } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
-import { CityData } from "../models/city-data";
+import { CityData, CityDetails } from "../models/city-data";
 
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
     currentConditions?: CurrentCondition[];
-    cities?: CityData[];
+    cities?: CityDetails[];
 
 };
 
@@ -58,7 +58,6 @@ fetchCurrentConditions(
 ) {
     return this.locationService.getCityData(city).pipe(tap({
         next: (cities) => {
-            console.log(cities);
             patchState({
                 cities,
             })
