@@ -9,3 +9,7 @@ export class FetchCities {
 
     constructor(public city: string) {}
 }
+
+export class ClearCities {
+    static readonly type = '[App] ClearCities';
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Select } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
@@ -12,7 +12,7 @@ import { CityData, CityDetails } from '../../../models/city-data';
   templateUrl: './suggestions.component.html',
   styleUrls: ['./suggestions.component.scss']
 })
-export class SuggestionsComponent implements OnInit {
+export class SuggestionsComponent implements OnInit, OnDestroy {
   @Select(AppState.cities) cities$!: Observable<CityDetails[]>;
 
   public cities!: CityDetails[];
@@ -21,11 +21,12 @@ export class SuggestionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cities$.pipe(takeUntil(this.unsubscribe)).subscribe((cities) => {
-      if(!cities) {
-        return;
-      }
       this.cities = cities;
     })
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 }

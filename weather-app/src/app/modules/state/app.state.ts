@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { FetchCities, FetchCurrentConditions } from "./app.actions";
+import { ClearCities, FetchCities, FetchCurrentConditions } from "./app.actions";
 import { tap } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { CityData, CityDetails } from "../models/city-data";
@@ -10,7 +10,7 @@ import { CityData, CityDetails } from "../models/city-data";
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
     currentConditions?: CurrentCondition[];
-    cities?: CityDetails[];
+    cities?: CityDetails[] | null;
 
 };
 
@@ -23,46 +23,52 @@ export interface AppStateModel {
 
 @Injectable()
 export class AppState {
-    
-    constructor(private locationService: LocationsService,) {}
 
-@Selector()
-static currentConditions(state: AppStateModel) {
-    return state.currentConditions;
-}
+    constructor(private locationService: LocationsService,) { }
 
-@Selector()
-static cities(state: AppStateModel) {
-    return state.cities;
-}
+    @Selector()
+    static currentConditions(state: AppStateModel) {
+        return state.currentConditions;
+    }
 
-@Action(FetchCurrentConditions) 
-fetchCurrentConditions(
-    {patchState}: StateContext<AppStateModel>,
-    {key}: FetchCurrentConditions,
-) {
-    return this.locationService.getCurrentCondition(key).pipe(tap({
-        next: (currentConditions) => {
-            patchState({
-                currentConditions
-            })
-        },
-        error: (e) => {console.error(e)}
-    }))
-}
+    @Selector()
+    static cities(state: AppStateModel) {
+        return state.cities;
+    }
 
-@Action(FetchCities) 
+    @Action(FetchCurrentConditions)
+    fetchCurrentConditions(
+        { patchState }: StateContext<AppStateModel>,
+        { key }: FetchCurrentConditions,
+    ) {
+        return this.locationService.getCurrentCondition(key).pipe(tap({
+            next: (currentConditions) => {
+                patchState({
+                    currentConditions
+                })
+            },
+            error: (e) => { console.error(e) }
+        }))
+    }
+
+    @Action(FetchCities)
     fetchCities(
-    {patchState}: StateContext<AppStateModel>,
-    {city}: FetchCities,
-) {
-    return this.locationService.getCityData(city).pipe(tap({
-        next: (cities) => {
-            patchState({
-                cities,
-            })
-        },
-        error: (e) => {console.error(e)}
-    }))
-}
+        { patchState }: StateContext<AppStateModel>,
+        { city }: FetchCities,
+    ) {
+        return this.locationService.getCityData(city).pipe(tap({
+            next: (cities) => {
+                patchState({
+                    cities,
+                })
+            },
+            error: (e) => { console.error(e) }
+        }))
+    }
+
+    @Action(ClearCities)
+    clearCities(
+        { patchState }: StateContext<AppStateModel>) {
+        patchState({cities: null})
+    }
 }
