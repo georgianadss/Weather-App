@@ -5,6 +5,10 @@
         <span class="fs-5 ms-1"><i class="bi bi-cloud-sun"></i></span>
     </div>
     <div class="d-flex align-items-center">
+        <div class="favorite-icon me-2 d-flex align-items-center font-size-20">
+            <i [ngClass]="!!favoriteCities.length ? 'bi-heart-fill' : 'bi-heart'"></i>
+            <h5 class="font-size-14 ms-2 mb-0">{{ favoriteCities.length }}</h5>
+        </div>
         <app-search></app-search>
         <a routerLink="/login" routerLinkActive="active" class="mx-3">Login</a>
     </div>

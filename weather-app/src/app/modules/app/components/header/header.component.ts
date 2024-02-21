@@ -1,16 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SearchComponent } from "../search/search.component";
+import { City } from '../../../models/city-data';
+import { Select } from '@ngxs/store';
+import { AppState } from '../../../state/app.state';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 
 @Component({
-    selector: 'app-header',
-    standalone: true,
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    imports: [CommonModule, RouterModule, SearchComponent]
+  selector: 'app-header',
+  standalone: true,
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  imports: [CommonModule, RouterModule, SearchComponent]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  @Select(AppState.favoriteCities) favoriteCities$!: Observable<City[]>;
+
+  public isFavorite!: boolean;
   public mockedCityName: string = 'London, United Kingdom, 11C';
+  public favoriteCities: City[] = [];
+  public unsubscribe: Subject<void> = new Subject();
+
+  constructor() { };
+
+  ngOnInit(): void {
+    this.favoriteCities$.pipe(takeUntil(this.unsubscribe)).subscribe((favoriteCities) => {
+      this.favoriteCities = favoriteCities;
+    })
+
+  }
 }
