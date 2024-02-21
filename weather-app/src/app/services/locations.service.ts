@@ -3,13 +3,16 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CurrentCondition } from '../modules/models/current-conditions';
 import { TopCityList } from '../modules/models/top-city-list';
-import { CityData, CityDetails } from '../modules/models/city-data';
+import { City, CityDetails } from '../modules/models/city-data';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationsService {
+    selectedCity(city: City) {
+        throw new Error("Method not implemented.");
+    }
   private apiUrl = 'http://dataservice.accuweather.com';
 
   public readonly API_KEY: string = 'MaBdG9cXOg0g3aABJdNxIZo5wTjmqIuK';

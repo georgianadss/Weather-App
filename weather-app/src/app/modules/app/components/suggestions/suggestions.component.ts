@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
-import { City, CityData, CityDetails } from '../../../models/city-data';
+import { City, CityDetails } from '../../../models/city-data';
+import { SaveCityToFavorites } from '../../../state/app.actions';
 
 @Component({
   selector: 'app-suggestions',
@@ -19,6 +20,8 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   public unsubscribe: Subject<void> = new Subject()
 
+  constructor(private store: Store,) { }
+
   ngOnInit(): void {
     this.cities$.pipe(takeUntil(this.unsubscribe)).subscribe((cities) => {
       this.cities = cities;
@@ -26,7 +29,6 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
   }
 
   selectedCity(city: CityDetails) {
-    console.log(city);
     const newCity: City = {
       key: city.Key,
       cityName: city.LocalizedName,
@@ -35,7 +37,7 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       countryName: city.Country.LocalizedName,
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
-    console.log(newCity);
+    this.store.dispatch(new SaveCityToFavorites(newCity));
   }
 
   ngOnDestroy(): void {
