@@ -18,6 +18,8 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   public cities!: CityDetails[];
 
+  public cityKey!: string;
+
   public unsubscribe: Subject<void> = new Subject()
 
   constructor(private store: Store,) { }
@@ -37,6 +39,7 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       countryName: city.Country.LocalizedName,
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
+    this.cityKey = city.Key;
     this.store.dispatch(new SaveCityToFavorites(newCity));
   }
 
