@@ -6,7 +6,7 @@
         <h5 class="border-bottom p-3 pb-1 font-size-14 m-0">Recent</h5>
         <ul class="p-0 m-0">
             <li class="d-flex align-items-center justify-content-between p-3"
-                *ngFor="let city of cities">
+                *ngFor="let city of cities" (click)="selectedCity(city)">
                 <div class="d-flex flex-column">
                     <div class="font-size-14">{{ city?.LocalizedName }}</div>
                     <div class="font-size-14">{{ city?.Region?.LocalizedName }}</div>
