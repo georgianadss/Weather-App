@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { FavoriteCitiesComponent } from './components/favorite-cities/favorite-cities.component';
 
 export const APP_ROUTE: Route[] = [
     {
@@ -10,4 +11,11 @@ export const APP_ROUTE: Route[] = [
         pathMatch: 'full',
         loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent),
     },
+
+    {
+        path: 'favoritecities',
+        pathMatch: 'full',
+        component: FavoriteCitiesComponent,
+        // loadComponent: () => import('./components/favorite-cities/favorite-cities.component').then(mod => mod.FavoriteCitiesComponent),
+    }
 ];
