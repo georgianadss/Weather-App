@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CurrentConditionsComponent } from '../components/current-conditions/current-conditions.component';
 import { ConfigService } from '../../../services/config.service';
-import { FavoriteCitiesComponent } from "../components/favorite-cities/favorite-cities.component";
 
 
 
@@ -25,8 +23,6 @@ import { FavoriteCitiesComponent } from "../components/favorite-cities/favorite-
         RouterModule,
         HeaderComponent,
         HttpClientModule,
-        CurrentConditionsComponent,
-        FavoriteCitiesComponent,
     ]
 })
 export class HomeComponent {

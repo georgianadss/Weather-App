@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {  RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {  RouterLink, RouterModule } from '@angular/router';
 import { SearchComponent } from "../search/search.component";
 import { City } from '../../../models/city-data';
 import { Select } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { FavoriteCitiesComponent } from '../favorite-cities/favorite-cities.component';
 import { HomeComponent } from '../../home/home.component';
 
 
@@ -15,7 +14,7 @@ import { HomeComponent } from '../../home/home.component';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [CommonModule, RouterModule, SearchComponent, FavoriteCitiesComponent, RouterOutlet, RouterLink, HomeComponent]
+  imports: [CommonModule, RouterModule, SearchComponent, RouterLink, HomeComponent]
 })
 export class HeaderComponent implements OnInit {
   @Select(AppState.favoriteCities) favoriteCities$!: Observable<City[]>;

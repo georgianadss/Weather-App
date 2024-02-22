@@ -1,21 +1,13 @@
 import { Route } from '@angular/router';
 import { FavoriteCitiesComponent } from './components/favorite-cities/favorite-cities.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './components/login/login.component';
 
-export const APP_ROUTE: Route[] = [
-    {
-    path: '',
-    loadChildren: () => import('./home/home.route').then(r => r.HOME_ROUTE),
-    },
-    {
-        path: '',
-        pathMatch: 'full',
-        loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent),
-    },
-
-    {
-        path: 'favoritecities',
-        pathMatch: 'full',
-        component: FavoriteCitiesComponent,
-        // loadComponent: () => import('./components/favorite-cities/favorite-cities.component').then(mod => mod.FavoriteCitiesComponent),
-    }
+export const routes: Route[] = [
+    { path: '', component: HomeComponent},
+    { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'favoritecities', component: FavoriteCitiesComponent},
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
