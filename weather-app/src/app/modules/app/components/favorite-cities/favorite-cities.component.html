@@ -1,7 +1,9 @@
 <app-header></app-header>
 <h6 class="m-3 font-size-20 text-center">Favorite Cities's List</h6>
 <div class="d-flex align-items-center flex-wrap justify-content-center" *ngIf="favoriteCitiesList?.length; else emptyTemplate">
-    <div class="card-box border d-flex w-25 flex-column ms-3 mb-3" *ngFor="let city of favoriteCitiesList">
+    <div class="card-box border d-flex w-25 flex-column ms-3 mb-3" 
+        *ngFor="let city of favoriteCitiesList">
+        <button type="button" (click)="removeItem(city.key)">Remove</button>
         <div>
             <h5 class="m-3 text-center">{{ city.cityName }}</h5>
             <div class="d-flex border-bottom align-items-center justify-content-between">

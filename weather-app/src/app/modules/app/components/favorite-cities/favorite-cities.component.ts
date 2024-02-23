@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { City } from '../../../models/city-data';
+import { RemoveFavoriteCity } from '../../../state/app.actions';
 
 @Component({
     selector: 'app-favorite-cities',
@@ -20,12 +21,15 @@ public favoriteCitiesList!: City[];
 
 readonly unsubscribe = new Subject<void>();
 
-constructor() {}
+constructor(private store: Store) {}
 
 ngOnInit(): void {
   this.favoriteCities$.pipe(takeUntil(this.unsubscribe)).subscribe((saveCityToFavorites) => {
     this.favoriteCitiesList = saveCityToFavorites;
-    console.log(saveCityToFavorites);
   })
+}
+
+removeItem(key: string){
+  this.store.dispatch(new RemoveFavoriteCity(key));
 }
 }
