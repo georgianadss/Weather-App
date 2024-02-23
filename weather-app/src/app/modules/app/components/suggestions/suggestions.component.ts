@@ -31,6 +31,9 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
   }
 
   selectedCity(city: CityDetails) {
+    const citiesLimit: City[] = this.store.selectSnapshot(AppState.favoriteCities) ?? [];
+    if(citiesLimit.length >= 9) return;
+
     const newCity: City = {
       key: city.Key,
       cityName: city.LocalizedName,
