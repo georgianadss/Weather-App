@@ -78,11 +78,6 @@ export class AppState {
         { city }: SaveCityToFavorites,
     ) {
         const saveCityToFavorites: City[] = getState().favoriteCities || [];
-        const cityExists = saveCityToFavorites.some(favCity => favCity.key === city.key);
-        if(cityExists) {
-            return;
-        }
-
         saveCityToFavorites.push(city);
         return patchState({ favoriteCities: saveCityToFavorites })
     }
