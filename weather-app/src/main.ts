@@ -8,10 +8,11 @@ import { NgxsModule } from '@ngxs/store';
 import { AppState } from './app/modules/state/app.state';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './app/interceptors/app.interceptor';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(routes), LocationsService, 
+  providers: [provideRouter(routes), LocationsService, provideAnimations(),
   importProvidersFrom(NgxsModule.forRoot([AppState])), 
-  provideHttpClient(withInterceptors([authInterceptor]))],   
+  provideHttpClient(withInterceptors([authInterceptor]))],  
 });

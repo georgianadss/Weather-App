@@ -5,6 +5,7 @@ import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { City, CityDetails } from '../../../models/city-data';
 import { SaveCityToFavorites } from '../../../state/app.actions';
+import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-suggestions',
@@ -14,6 +15,7 @@ import { SaveCityToFavorites } from '../../../state/app.actions';
   styleUrls: ['./suggestions.component.scss']
 })
 export class SuggestionsComponent implements OnInit, OnDestroy {
+  [x: string]: any;
   @Select(AppState.cities) cities$!: Observable<CityDetails[]>;
 
   public cities!: CityDetails[];
@@ -22,12 +24,13 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   public unsubscribe: Subject<void> = new Subject()
 
-  constructor(private store: Store,) { }
+
+  constructor(private store: Store, private notify: NotificationService, ) { }
 
   ngOnInit(): void {
     this.cities$.pipe(takeUntil(this.unsubscribe)).subscribe((cities) => {
       this.cities = cities;
-    })
+    });
   }
 
   selectedCity(city: CityDetails) {
@@ -36,10 +39,9 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
     const cityExists = cities.some(favCity => favCity.key === city.Key);
     if(cityExists) {
-        return;
+      this.notify.fail('This city is already in your list');
+      return;
     }
-
-
     const newCity: City = {
       key: city.Key,
       cityName: city.LocalizedName,
