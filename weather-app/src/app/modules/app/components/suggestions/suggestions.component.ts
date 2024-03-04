@@ -25,7 +25,7 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
   public unsubscribe: Subject<void> = new Subject()
 
 
-  constructor(private store: Store, private notify: NotificationService, ) { }
+  constructor(private store: Store, private notify: NotificationService,) { }
 
   ngOnInit(): void {
     this.cities$.pipe(takeUntil(this.unsubscribe)).subscribe((cities) => {
@@ -35,13 +35,13 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   selectedCity(city: CityDetails) {
     const cities: City[] = this.store.selectSnapshot(AppState.favoriteCities) ?? [];
-    if(cities.length >= 9) {
-      this.notify.warning('You reached the maximum number of favorite cities')
+    if (cities.length >= 9) {
+      this.notify.warning('You reached the maximum number of favorite cities');
       return;
     }
 
     const cityExists = cities.some(favCity => favCity.key === city.Key);
-    if(cityExists) {
+    if (cityExists) {
       this.notify.fail('This city is already in your list');
       return;
     }

@@ -13,6 +13,7 @@ export enum SnackBarType {
 })
 
 export class NotificationService {
+    readonly DURATION: number = 5000;
 
     constructor(protected snackBar: MatSnackBar) { }
 
@@ -31,7 +32,8 @@ export class NotificationService {
     private notify(translationKey: string, snackBarType: SnackBarType, params: object = {}): any {
         const message: string = translationKey;
         return this.snackBar.openFromComponent(SnackbarComponent, {
-            data: { message, snackBarType }
-          })
+            data: { message, snackBarType, },
+            duration: this.DURATION,
+        })
     }
 }
