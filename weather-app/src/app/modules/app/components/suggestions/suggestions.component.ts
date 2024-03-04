@@ -35,7 +35,10 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   selectedCity(city: CityDetails) {
     const cities: City[] = this.store.selectSnapshot(AppState.favoriteCities) ?? [];
-    if(cities.length >= 9) return;
+    if(cities.length >= 9) {
+      this.notify.warning('You reached the maximum number of favorite cities')
+      return;
+    }
 
     const cityExists = cities.some(favCity => favCity.key === city.Key);
     if(cityExists) {
