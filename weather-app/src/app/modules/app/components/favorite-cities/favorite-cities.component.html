@@ -13,7 +13,7 @@
                 <h5 class="m-3 text-center">{{ city.cityName }}</h5>
                 <div class="d-flex border-bottom align-items-center justify-content-between">
                     <h5 class="m-0 ms-2 font-size-14">Current Weather</h5>
-                    <span class="font-size-14 me-2">Time 12:00</span>
+                    <span class="font-size-14 me-2">{{ city.timeZone }} </span>
                 </div>
                 <div class="m-2 d-flex flex-row justify-content-between align-items-center">
                     <div class="icon-box d-flex align-items-center flex-column">
@@ -26,6 +26,9 @@
                         <h5 class="font-size-14 me-2">Latitude {{ city.geoPosition }}</h5>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center m-0">
+                <button class="btn btn-primary btn-see-more">See more</button>
             </div>
         </div>
     </div>

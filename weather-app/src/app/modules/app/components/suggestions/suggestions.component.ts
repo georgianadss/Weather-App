@@ -51,6 +51,7 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       postalCode: city.PrimaryPostalCode,
       regionName: city.Region.LocalizedName,
       countryName: city.Country.LocalizedName,
+      timeZone:city.TimeZone.GmtOffset,
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
     this.cityKey = city.Key;

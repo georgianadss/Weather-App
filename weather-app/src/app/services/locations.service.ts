@@ -15,7 +15,7 @@ export class LocationsService {
     }
   private apiUrl = 'http://dataservice.accuweather.com';
 
-  public readonly API_KEY: string = 'MaBdG9cXOg0g3aABJdNxIZo5wTjmqIuK';
+  public readonly API_KEY: string = 'PqyStkK8gFLWdkDb6VICqxGZp2bEby8T';
 
   constructor(private http: HttpClient) { };
 
