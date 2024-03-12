@@ -27,3 +27,9 @@ export class RemoveFavoriteCity {
 export class ClearCities {
     static readonly type = '[App] ClearCities';
 }
+
+export class FetchLocation {
+    static readonly type = '[App] FetchLocation';
+
+    constructor(public key: string) {};
+}

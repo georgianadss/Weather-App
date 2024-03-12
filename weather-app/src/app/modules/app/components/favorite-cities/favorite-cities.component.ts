@@ -5,14 +5,16 @@ import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { City } from '../../../models/city-data';
-import { RemoveFavoriteCity } from '../../../state/app.actions';
+import { FetchLocation, RemoveFavoriteCity } from '../../../state/app.actions';
+import { CityWeatherDetailsComponent } from '../city-weather-details/city-weather-details.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-favorite-cities',
     standalone: true,
     templateUrl: './favorite-cities.component.html',
     styleUrls: ['./favorite-cities.component.scss'],
-    imports: [CommonModule, HeaderComponent]
+    imports: [CommonModule, HeaderComponent, CityWeatherDetailsComponent, RouterLink, RouterModule]
 })
 export class FavoriteCitiesComponent implements OnInit{
 @Select(AppState.favoriteCities) favoriteCities$!: Observable<City[]>
@@ -27,6 +29,10 @@ ngOnInit(): void {
   this.favoriteCities$.pipe(takeUntil(this.unsubscribe)).subscribe((saveCityToFavorites) => {
     this.favoriteCitiesList = saveCityToFavorites;
   })
+}
+
+addMoreDetails(key: string) {
+  this.store.dispatch(new FetchLocation(key));
 }
 
 removeItem(key: string){

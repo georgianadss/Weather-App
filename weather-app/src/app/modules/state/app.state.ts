@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { ClearCities, FetchCities, FetchCurrentConditions, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
+import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
 import { tap } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
@@ -12,6 +12,7 @@ export interface AppStateModel {
     currentConditions?: CurrentCondition[];
     cities?: CityDetails[] | null;
     favoriteCities?: City[];
+    location?: any;
 };
 
 @State<AppStateModel>({
@@ -40,6 +41,11 @@ export class AppState {
     @Selector()
     static favoriteCities(state: AppStateModel) {
         return state.favoriteCities;
+    }
+
+    @Selector()
+    static location(state: AppStateModel) {
+        return state.location;
     }
 
     @Action(FetchCurrentConditions)
@@ -96,5 +102,15 @@ export class AppState {
     clearCities(
         { patchState }: StateContext<AppStateModel>) {
         patchState({ cities: null })
+    }
+
+    @Action(FetchLocation)
+    fetchLocation(
+        { patchState}: StateContext<AppStateModel>,
+        { key }: FetchLocation,
+    ) {
+      return this.locationService.getLocation(key).pipe(tap((data) => {
+        patchState({location: data})
+      }))
     }
 }

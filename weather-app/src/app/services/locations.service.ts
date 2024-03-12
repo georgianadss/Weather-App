@@ -32,6 +32,10 @@ export class LocationsService {
     return this.http.get<CityDetails[]>(`${this.apiUrl}/locations/v1/cities/search?apikey=${this.API_KEY}&q=${city}`);
   } 
 
+  getLocation(locationKey: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/locations/v1/${locationKey}?apikey=${this.API_KEY}`)
+  }
+
   // getCityData(city: string): Observable<CityData[]> {
   //   return this.http.get<CityData[]>(`${this.apiUrl}/locations/v1/cities/autocomplete?apikey=${this.API_KEY}&q=${city}`);
   // } 
