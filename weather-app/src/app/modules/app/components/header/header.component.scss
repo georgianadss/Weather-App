@@ -1,19 +1,29 @@
 @import 'variables.scss';
 
 .header {
-    background-color: $dark-background;
-   a {
+  background-color: $dark-background;
+
+  a {
     color: $light-white;
     text-decoration: none;
-   }
-   .active {
-    color: blue;
-   }
-   
-   h5, span {
+  }
+
+  .active {
+    color: #ffa500;
+  }
+
+  h5,
+  span {
     color: $light-white;
-   }
-   .favorite-icon {
-     color: $bluefavorite;
-   }
+  }
+
+  .favorite-icon {
+    i {
+      color: $orange;
+    }
+
+    button {
+      background-color: transparent;
+    }
+  }
 }

@@ -1,0 +1,9 @@
+<div class="d-flex align-items-center" [ngClass]=" 'toast-' + data?.snackBarType">
+  <i class="bi bi-check2" *ngIf="data.snackBarType === SNACKBAR_TYPE.SUCCESS"></i>
+  <i class="bi-exclamation-circle" *ngIf="data.snackBarType === SNACKBAR_TYPE.FAIL"></i>
+  <i class="bi bi-exclamation-triangle" *ngIf="data.snackBarType === SNACKBAR_TYPE.WARNING"></i>
+  <p class="d-flex w-100 px-2 mb-0" *ngIf="data?.message">
+    {{ data.message }}
+  </p>
+  <button (click)="onDismiss()" class="border-0"><i class="bi bi-x-circle"></i></button>
+</div>

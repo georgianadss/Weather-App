@@ -84,5 +84,6 @@ export interface City {
   postalCode: string,
   regionName: string,
   countryName: string,
+  timeZone: number,
   geoPosition: number,
 }

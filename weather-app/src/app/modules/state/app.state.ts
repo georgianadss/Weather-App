@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { ClearCities, FetchCities, FetchCurrentConditions, SaveCityToFavorites } from "./app.actions";
+import { ClearCities, FetchCities, FetchCurrentConditions, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
 import { tap } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
@@ -80,6 +80,16 @@ export class AppState {
         const saveCityToFavorites: City[] = getState().favoriteCities || [];
         saveCityToFavorites.push(city);
         return patchState({ favoriteCities: saveCityToFavorites })
+    }
+
+    @Action(RemoveFavoriteCity)
+    removeFavoriteCity(
+        { patchState, getState }: StateContext<AppStateModel>,
+        { key }: RemoveFavoriteCity,
+    ) {
+       const {favoriteCities} = getState();
+       const newList = favoriteCities?.filter(city => city.key !== key);
+        return patchState({ favoriteCities: newList });
     }
 
     @Action(ClearCities)

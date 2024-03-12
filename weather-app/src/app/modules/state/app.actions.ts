@@ -18,6 +18,12 @@ export class SaveCityToFavorites {
     constructor(public city: City) { }
 }
 
+export class RemoveFavoriteCity {
+    static readonly type = '[App] RemoveFavoriteCity';
+
+    constructor(public key: string) {};
+}
+
 export class ClearCities {
     static readonly type = '[App] ClearCities';
 }
