@@ -4,7 +4,7 @@ import { AppState } from '../../../state/app.state';
 import { Select } from '@ngxs/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
-import { RouterLink, RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-city-weather-details',
@@ -22,7 +22,7 @@ export class CityWeatherDetailsComponent implements OnInit{
 
   ngOnInit(): void {   
     this.location$?.pipe(takeUntil(this.unsubscribe)).subscribe((location) => {
-      console.log('in componenta mea', location)
+      this.location = location;
     })
   }
 

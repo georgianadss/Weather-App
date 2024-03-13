@@ -1,4 +1,22 @@
 <app-header></app-header>
-<div>
-    This works
+<div class="flex-wrap d-flex flex-column details-container w-50">
+        <h6 class="m-2 p-2 border-bottom font-size-14 text-center">Wed, Mar 13</h6>
+    <div class="d-flex m-2 mt-0 flex-column bg-white p-2">
+            <h6 class="m-2 mt-0 font-size-18 fw-normal border-bottom">Day</h6>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="d-flex flex-column ms-5 align-items-center">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="bi bi-cloud-rain-fill fs-1 mb-0"></i>
+                    <h6 class="m-2 font-size-30 fw-normal mb-0">16  Hi</h6>
+                </div>
+                <p class="m-2 mt-0">Cloudy with showers</p>
+            </div>
+            <div class="d-flex flex-column me-5 align-items-center">
+                <h6 class="m-2 font-size-20 mb-0">RealFeel:</h6>
+                <h6 class="m-2 font-size-20 mb-0">RealShade:</h6>
+            </div>
+
+        </div>
+    </div>
+   {{location | json }}
 </div>
