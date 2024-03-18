@@ -6,13 +6,14 @@ import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, Remove
 import { tap } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
+import { LocationForecastData } from "../models/location-forecasts";
 
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
     currentConditions?: CurrentCondition[];
     cities?: CityDetails[] | null;
     favoriteCities?: City[];
-    location?: any;
+    location?: LocationForecastData;
 };
 
 @State<AppStateModel>({
