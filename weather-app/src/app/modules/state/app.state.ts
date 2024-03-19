@@ -2,11 +2,13 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
+import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, FetchLoginData, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
 import { tap } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
 import { LocationForecastData } from "../models/location-forecasts";
+import { LoginResponse } from "../models/login-data";
+
 
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
@@ -14,6 +16,7 @@ export interface AppStateModel {
     cities?: CityDetails[] | null;
     favoriteCities?: City[];
     location?: LocationForecastData;
+    loginResponse?: LoginResponse;
 };
 
 @State<AppStateModel>({
@@ -47,6 +50,24 @@ export class AppState {
     @Selector()
     static location(state: AppStateModel) {
         return state.location;
+    }
+
+    @Selector() 
+    static login(state: AppStateModel) {
+        return state.loginResponse;
+    }
+
+
+    @Action(FetchLoginData)
+    fetchLoginData(
+        { patchState }: StateContext<AppStateModel>,
+        { loginData }: FetchLoginData,
+    ) {
+        return this.locationService.getLoginDetails(loginData).pipe((tap(response => {
+            patchState({
+                loginResponse: response,
+            })
+        })))
     }
 
     @Action(FetchCurrentConditions)
