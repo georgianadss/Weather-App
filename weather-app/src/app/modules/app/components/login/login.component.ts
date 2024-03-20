@@ -65,8 +65,14 @@ export class LoginComponent implements OnInit {
     password: this.passwordControl.value,
    }
     this.store.dispatch(new FetchLoginData(login)).pipe().subscribe({
-      next: () => console.log('Aici a terminat'),
+      next: () => {
+        this.errorMessage = undefined;
+        this.resetForm()},
       error: () => this.errorMessage = 'Username or password is incorrect',
     })
+  }
+
+  resetForm() {
+    this.formGroup.reset();
   }
 }
