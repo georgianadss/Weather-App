@@ -9,7 +9,7 @@
              id="userName" type="text" 
              required="required"
              autocomplete="off"
-             [class.errors]="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched)">
+             [class.errors]="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched) || errorMessage">
              <app-errors [formControl]="userNameControl" [requiredMessage]="'Name is required'" [minLengthMessage]="'Name should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
         <div class="d-flex flex-column">
@@ -19,11 +19,11 @@
             id="password" type="password"
             required="required"
             autocomplete="off"
-            [class.errors]="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
+            [class.errors]="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched) || errorMessage">
             <app-errors [formControl]="passwordControl" 
             [requiredMessage]="'Password is required'" [minLengthMessage]="'Password should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
-        <div class="error-message font-size-14">
+        <div class="error-message font-size-14 alert" *ngIf="errorMessage">
             {{ errorMessage }}
         </div>
         <button type="submit" 

@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
    }
     this.store.dispatch(new FetchLoginData(login)).pipe().subscribe({
       next: () => console.log('Aici a terminat'),
-      error: () => this.errorMessage = 'Login details have failed',
+      error: () => this.errorMessage = 'Username or password is incorrect',
     })
   }
 }
