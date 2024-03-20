@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
 
   public formGroup!: FormGroup<LoginData>;
 
+  public errorMessage: string | undefined;
+
   public readonly MIN_LENGTH: number = 5;
 
   get userNameControl() {
@@ -64,7 +66,7 @@ export class LoginComponent implements OnInit {
    }
     this.store.dispatch(new FetchLoginData(login)).pipe().subscribe({
       next: () => console.log('Aici a terminat'),
-      error: () => console.log('Aici este o erroare')
+      error: () => this.errorMessage = 'Login details have failed',
     })
   }
 }

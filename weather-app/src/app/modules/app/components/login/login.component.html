@@ -23,6 +23,9 @@
             <app-errors [formControl]="passwordControl" 
             [requiredMessage]="'Password is required'" [minLengthMessage]="'Password should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
+        <div class="error-message font-size-14">
+            {{ errorMessage }}
+        </div>
         <button type="submit" 
             class="btn btn-primary mt-2" 
             [disabled]="formGroup.invalid">Submit</button>
