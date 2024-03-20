@@ -4,9 +4,8 @@ export interface Login {
 }
 
 export interface LoginResponse {
-    name?: string,
-    id?: number,
-    organisation?: string,
-    isLogginIn?: boolean,
-    response?: string,
+    name: string,
+    id: number,
+    organisation: string,
+    isLogginIn: boolean,
 }

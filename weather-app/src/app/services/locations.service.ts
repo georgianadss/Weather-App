@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CurrentCondition } from '../modules/models/current-conditions';
 import { TopCityList } from '../modules/models/top-city-list';
@@ -55,6 +55,6 @@ export class LocationsService {
       }
       return of(loginResponse);
     }
-    return  of({response: 'It is empty'});
+    return throwError(() => 'The login has failed');
   }
 }

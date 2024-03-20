@@ -3,7 +3,7 @@ import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
 import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, FetchLoginData, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
-import { tap } from "rxjs";
+import { catchError, tap, throwError } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
 import { LocationForecastData } from "../models/location-forecasts";
@@ -63,11 +63,14 @@ export class AppState {
         { patchState }: StateContext<AppStateModel>,
         { loginData }: FetchLoginData,
     ) {
-        return this.locationService.getLoginDetails(loginData).pipe((tap(response => {
+        return this.locationService.getLoginDetails(loginData).pipe(
+            tap(response => {
             patchState({
                 loginResponse: response,
             })
-        })))
+        }),
+        catchError(e => throwError(() => e))
+        )
     }
 
     @Action(FetchCurrentConditions)
@@ -81,7 +84,7 @@ export class AppState {
                     currentConditions
                 })
             },
-            error: (e) => { console.error(e) }
+            error: (e) => console.error(e)
         }))
     }
 

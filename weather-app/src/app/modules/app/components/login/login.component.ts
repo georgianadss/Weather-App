@@ -62,6 +62,9 @@ export class LoginComponent implements OnInit {
     userName: this.userNameControl.value,
     password: this.passwordControl.value,
    }
-    this.store.dispatch(new FetchLoginData(login))
+    this.store.dispatch(new FetchLoginData(login)).pipe().subscribe({
+      next: () => console.log('Aici a terminat'),
+      error: () => console.log('Aici este o erroare')
+    })
   }
 }
