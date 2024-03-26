@@ -1,0 +1,34 @@
+<div class="flex-wrap d-flex flex-column" *ngIf="selectedCity">
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="card-box border d-flex w-25 flex-column ms-3 mb-3 justify-content-center">
+            <div class="d-flex justify-content-end">
+                <button type="button" (click)="saveCityToFavorites(selectedCity)" class="border-0 text-left btn-sm p-2">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </div>
+            <div>
+                <h5 class="m-3 text-center">{{ this.selectedCity.cityName }}</h5>
+                <div class="d-flex border-bottom align-items-center justify-content-between">
+                    <h5 class="m-0 ms-2 font-size-14">Current Weather</h5>
+                    <span class="font-size-14 me-2">{{ this.selectedCity.geoPosition }} </span>
+                </div>
+                <div class="m-2 d-flex flex-row justify-content-between align-items-center">
+                    <div class="icon-box d-flex align-items-center flex-column">
+                        <i class="bi bi-brightness-high font-size-50"></i>
+                        <h5 class="font-size-14 me-2">Sunny</h5>
+                    </div>
+                    <div class="temperature-box d-flex align-items-center flex-column">
+                        <h5 class="font-size-20 me-2">20C</h5>
+                        <h5 class="font-size-14 me-2">{{ this.selectedCity.regionName }}</h5>
+                        <h5 class="font-size-14 me-2">Latitude {{ this.selectedCity.postalCode }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center m-0">
+                <button class="btn btn-primary btn-see-more" 
+                (click)="addMoreDetails(selectedCity.key)" 
+                routerLink="/cityweatherdetails">See more</button>
+            </div>
+        </div>
+    </div>
+</div>

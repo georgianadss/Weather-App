@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { City, CityDetails } from '../../../models/city-data';
-import { SaveCityToFavorites } from '../../../state/app.actions';
+import { SaveCityToFavorites, SelectedCity } from '../../../state/app.actions';
 import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
@@ -55,7 +55,9 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
     this.cityKey = city.Key;
-    this.store.dispatch(new SaveCityToFavorites(newCity));
+    // this.store.dispatch(new SaveCityToFavorites(newCity));
+    console.log('start from component', newCity, new Date())
+    this.store.dispatch(new SelectedCity(newCity));
   }
 
   ngOnDestroy(): void {

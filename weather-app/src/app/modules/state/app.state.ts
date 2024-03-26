@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, FetchLoginData, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
+import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, FetchLoginData, RemoveFavoriteCity, SaveCityToFavorites, SelectedCity } from "./app.actions";
 import { catchError, tap, throwError } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
@@ -15,6 +15,7 @@ export interface AppStateModel {
     currentConditions?: CurrentCondition[];
     cities?: CityDetails[] | null;
     favoriteCities?: City[];
+    selectedCity?: City;
     location?: LocationForecastData;
     loginResponse?: LoginResponse;
 };
@@ -45,6 +46,11 @@ export class AppState {
     @Selector()
     static favoriteCities(state: AppStateModel) {
         return state.favoriteCities;
+    }
+
+    @Selector()
+    static selectedCity(state: AppStateModel) {
+        return state.selectedCity;
     }
 
     @Selector()
@@ -111,6 +117,19 @@ export class AppState {
         const saveCityToFavorites: City[] = getState().favoriteCities || [];
         saveCityToFavorites.push(city);
         return patchState({ favoriteCities: saveCityToFavorites })
+    }
+
+    @Action(SelectedCity)
+    selectedCity(
+        { patchState }: StateContext<AppStateModel>,
+        { city }: SelectedCity,
+    ) {
+        setTimeout(() => {
+            console.log('arrived in state',city, new Date());
+        }, 3000);
+       
+         patchState({ selectedCity: city });
+         
     }
 
     @Action(RemoveFavoriteCity)
