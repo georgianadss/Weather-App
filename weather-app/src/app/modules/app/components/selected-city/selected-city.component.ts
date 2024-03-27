@@ -16,7 +16,7 @@ import { RouterLink, RouterModule } from '@angular/router';
   templateUrl: './selected-city.component.html',
   styleUrls: ['./selected-city.component.scss']
 })
-export class SelectedCityComponent implements OnInit{
+export class SelectedCityComponent implements OnInit {
 
 
   @Select(AppState.selectedCity) selectedCity$: Observable<City> | undefined;
@@ -26,30 +26,25 @@ export class SelectedCityComponent implements OnInit{
   public unsubscribe: Subject<void> = new Subject();
 
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.selectedCity$?.pipe(takeUntil(this.unsubscribe)).subscribe((selectedCity) => {
       this.isFavorite = false;
       this.selectedCity = selectedCity;
-      console.log(selectedCity);
     })
   }
 
   addMoreDetails(key: string) {
     this.store.dispatch(new FetchLocation(key));
   }
-  
-  // removeItem(key: string){
-  //   this.store.dispatch(new RemoveFavoriteCity(key));
-  // }
+
   saveCityToFavorites(selectedCity: City) {
     this.isFavorite = !this.isFavorite;
-    if(this.isFavorite) {
+    if (this.isFavorite) {
       this.store.dispatch(new SaveCityToFavorites(selectedCity));
       return;
     }
     this.store.dispatch(new RemoveFavoriteCity(selectedCity.key));
   }
-
 }
