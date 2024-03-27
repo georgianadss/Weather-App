@@ -22,6 +22,7 @@ export class SelectedCityComponent implements OnInit{
   @Select(AppState.selectedCity) selectedCity$: Observable<City> | undefined;
 
   public selectedCity: City = {} as City;
+  public isFavorite: boolean = false;
   public unsubscribe: Subject<void> = new Subject();
 
 
@@ -29,6 +30,7 @@ export class SelectedCityComponent implements OnInit{
 
   ngOnInit(): void {
     this.selectedCity$?.pipe(takeUntil(this.unsubscribe)).subscribe((selectedCity) => {
+      this.isFavorite = false;
       this.selectedCity = selectedCity;
       console.log(selectedCity);
     })
@@ -42,6 +44,12 @@ export class SelectedCityComponent implements OnInit{
   //   this.store.dispatch(new RemoveFavoriteCity(key));
   // }
   saveCityToFavorites(selectedCity: City) {
-    this.store.dispatch(new SaveCityToFavorites(selectedCity));
+    this.isFavorite = !this.isFavorite;
+    if(this.isFavorite) {
+      this.store.dispatch(new SaveCityToFavorites(selectedCity));
+      return;
+    }
+    this.store.dispatch(new RemoveFavoriteCity(selectedCity.key));
   }
+
 }

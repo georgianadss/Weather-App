@@ -124,9 +124,6 @@ export class AppState {
         { patchState }: StateContext<AppStateModel>,
         { city }: SelectedCity,
     ) {
-        setTimeout(() => {
-            console.log('arrived in state',city, new Date());
-        }, 3000);
        
          patchState({ selectedCity: city });
          

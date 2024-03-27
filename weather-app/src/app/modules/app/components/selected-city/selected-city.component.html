@@ -3,7 +3,7 @@
         <div class="card-box border d-flex w-25 flex-column ms-3 mb-3 justify-content-center">
             <div class="d-flex justify-content-end">
                 <button type="button" (click)="saveCityToFavorites(selectedCity)" class="border-0 text-left btn-sm p-2">
-                    <i class="bi bi-trash3"></i>
+                    <i [ngClass]="isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
                 </button>
             </div>
             <div>

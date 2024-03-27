@@ -55,8 +55,6 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
     this.cityKey = city.Key;
-    // this.store.dispatch(new SaveCityToFavorites(newCity));
-    console.log('start from component', newCity, new Date())
     this.store.dispatch(new SelectedCity(newCity));
   }
 
