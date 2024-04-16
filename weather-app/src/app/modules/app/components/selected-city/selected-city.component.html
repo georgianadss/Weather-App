@@ -1,11 +1,16 @@
 <div class="flex-wrap d-flex flex-column" *ngIf="selectedCity">
     <div class="d-flex flex-wrap">
         <div class="card-box border d-flex w-25 flex-column ms-3 mb-3">
-            <div class="d-flex justify-content-end">
-                <button type="button" (click)="saveCityToFavorites(selectedCity)" class="border-0 text-left btn-sm p-2">
-                    <i [ngClass]="isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
-                </button>
+            <div class="favorites-icon d-flex flex-column align-items-end pe-2">
+                <div class="d-flex align-items-center flex-column">
+                    <button type="button" (click)="saveCityToFavorites(selectedCity)"
+                        class="border-0 text-left btn-sm p-2">
+                        <i [ngClass]="isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+                    </button>
+                    <h6 class="m-0 font-size-14">{{isFavorite ? 'Remove' : 'Add to favorites'}}</h6>
+                </div>
             </div>
+
             <div>
                 <h5 class="m-3 text-center">{{ this.selectedCity.cityName }}</h5>
                 <div class="d-flex border-bottom align-items-center justify-content-between">
@@ -25,9 +30,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center m-0">
-                <button class="btn btn-primary btn-see-more" 
-                (click)="addMoreDetails(selectedCity.key)" 
-                routerLink="/cityweatherdetails">See more</button>
+                <button class="btn btn-primary btn-see-more" (click)="addMoreDetails(selectedCity.key)"
+                    routerLink="/cityweatherdetails">See more</button>
             </div>
         </div>
     </div>

@@ -45,6 +45,8 @@ export class SelectedCityComponent implements OnInit {
       this.store.dispatch(new SaveCityToFavorites(selectedCity));
       return;
     }
+
+
     this.store.dispatch(new RemoveFavoriteCity(selectedCity.key));
   }
 }
