@@ -16,6 +16,7 @@ import { NotificationService } from '../../../../services/notification.service';
 })
 export class SuggestionsComponent implements OnInit, OnDestroy {
   [x: string]: any;
+  [x: string]: any;
   @Select(AppState.cities) cities$!: Observable<CityDetails[]>;
 
   public cities!: CityDetails[];
@@ -24,6 +25,8 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   public unsubscribe: Subject<void> = new Subject()
 
+
+  constructor(private store: Store, private notify: NotificationService,) { }
 
   constructor(private store: Store, private notify: NotificationService,) { }
 
@@ -45,13 +48,24 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       this.notify.fail('This city is already in your list');
       return;
     }
+    const cities: City[] = this.store.selectSnapshot(AppState.favoriteCities) ?? [];
+    if (cities.length >= 9) {
+      this.notify.warning('You reached the maximum number of favorite cities');
+      return;
+    }
+
+    const cityExists = cities.some(favCity => favCity.key === city.Key);
+    if (cityExists) {
+      this.notify.fail('This city is already in your list');
+      return;
+    }
     const newCity: City = {
       key: city.Key,
       cityName: city.LocalizedName,
       postalCode: city.PrimaryPostalCode,
       regionName: city.Region.LocalizedName,
       countryName: city.Country.LocalizedName,
-      timeZone:city.TimeZone.GmtOffset,
+      timeZone: city.TimeZone.GmtOffset,
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
     this.cityKey = city.Key;

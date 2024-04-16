@@ -58,7 +58,7 @@ export class AppState {
         return state.location;
     }
 
-    @Selector() 
+    @Selector()
     static login(state: AppStateModel) {
         return state.loginResponse;
     }
@@ -71,11 +71,11 @@ export class AppState {
     ) {
         return this.locationService.getLoginDetails(loginData).pipe(
             tap(response => {
-            patchState({
-                loginResponse: response,
-            })
-        }),
-        catchError(e => throwError(() => e))
+                patchState({
+                    loginResponse: response,
+                })
+            }),
+            catchError(e => throwError(() => e))
         )
     }
 
@@ -124,9 +124,9 @@ export class AppState {
         { patchState }: StateContext<AppStateModel>,
         { city }: SelectedCity,
     ) {
-       
-         patchState({ selectedCity: city });
-         
+
+        patchState({ selectedCity: city });
+
     }
 
     @Action(RemoveFavoriteCity)
@@ -134,8 +134,8 @@ export class AppState {
         { patchState, getState }: StateContext<AppStateModel>,
         { key }: RemoveFavoriteCity,
     ) {
-       const {favoriteCities} = getState();
-       const newList = favoriteCities?.filter(city => city.key !== key);
+        const { favoriteCities } = getState();
+        const newList = favoriteCities?.filter(city => city.key !== key);
         return patchState({ favoriteCities: newList });
     }
 
@@ -147,11 +147,11 @@ export class AppState {
 
     @Action(FetchLocation)
     fetchLocation(
-        { patchState}: StateContext<AppStateModel>,
+        { patchState }: StateContext<AppStateModel>,
         { key }: FetchLocation,
     ) {
-      return this.locationService.getLocation(key).pipe(tap((data) => {
-        patchState({location: data})
-      }))
+        return this.locationService.getLocation(key).pipe(tap((data) => {
+            patchState({ location: data })
+        }))
     }
 }
