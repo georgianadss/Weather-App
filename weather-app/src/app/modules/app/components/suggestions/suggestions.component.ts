@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { City, CityDetails } from '../../../models/city-data';
-import { SaveCityToFavorites, SelectedCity } from '../../../state/app.actions';
+import { SelectedCity } from '../../../state/app.actions';
 import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
@@ -15,8 +15,6 @@ import { NotificationService } from '../../../../services/notification.service';
   styleUrls: ['./suggestions.component.scss']
 })
 export class SuggestionsComponent implements OnInit, OnDestroy {
-  [x: string]: any;
-  [x: string]: any;
   @Select(AppState.cities) cities$!: Observable<CityDetails[]>;
 
   public cities!: CityDetails[];
@@ -28,7 +26,7 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store, private notify: NotificationService,) { }
 
-  constructor(private store: Store, private notify: NotificationService,) { }
+
 
   ngOnInit(): void {
     this.cities$.pipe(takeUntil(this.unsubscribe)).subscribe((cities) => {
@@ -48,17 +46,7 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       this.notify.fail('This city is already in your list');
       return;
     }
-    const cities: City[] = this.store.selectSnapshot(AppState.favoriteCities) ?? [];
-    if (cities.length >= 9) {
-      this.notify.warning('You reached the maximum number of favorite cities');
-      return;
-    }
 
-    const cityExists = cities.some(favCity => favCity.key === city.Key);
-    if (cityExists) {
-      this.notify.fail('This city is already in your list');
-      return;
-    }
     const newCity: City = {
       key: city.Key,
       cityName: city.LocalizedName,
