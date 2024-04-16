@@ -2,16 +2,22 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { LocationsService } from "../../services/locations.service";
 import { Injectable } from "@angular/core";
 import { CurrentCondition } from "../models/current-conditions";
-import { ClearCities, FetchCities, FetchCurrentConditions, RemoveFavoriteCity, SaveCityToFavorites } from "./app.actions";
-import { tap } from "rxjs";
+import { ClearCities, FetchCities, FetchCurrentConditions, FetchLocation, FetchLoginData, RemoveFavoriteCity, SaveCityToFavorites, SelectedCity } from "./app.actions";
+import { catchError, tap, throwError } from "rxjs";
 import { TopCityList } from "../models/top-city-list";
 import { City, CityDetails } from "../models/city-data";
+import { LocationForecastData } from "../models/location-forecasts";
+import { LoginResponse } from "../models/login-data";
+
 
 export interface AppStateModel {
     topCitiesList?: TopCityList[];
     currentConditions?: CurrentCondition[];
     cities?: CityDetails[] | null;
     favoriteCities?: City[];
+    selectedCity?: City;
+    location?: LocationForecastData;
+    loginResponse?: LoginResponse;
 };
 
 @State<AppStateModel>({
@@ -42,6 +48,37 @@ export class AppState {
         return state.favoriteCities;
     }
 
+    @Selector()
+    static selectedCity(state: AppStateModel) {
+        return state.selectedCity;
+    }
+
+    @Selector()
+    static location(state: AppStateModel) {
+        return state.location;
+    }
+
+    @Selector()
+    static login(state: AppStateModel) {
+        return state.loginResponse;
+    }
+
+
+    @Action(FetchLoginData)
+    fetchLoginData(
+        { patchState }: StateContext<AppStateModel>,
+        { loginData }: FetchLoginData,
+    ) {
+        return this.locationService.getLoginDetails(loginData).pipe(
+            tap(response => {
+                patchState({
+                    loginResponse: response,
+                })
+            }),
+            catchError(e => throwError(() => e))
+        )
+    }
+
     @Action(FetchCurrentConditions)
     fetchCurrentConditions(
         { patchState }: StateContext<AppStateModel>,
@@ -53,7 +90,7 @@ export class AppState {
                     currentConditions
                 })
             },
-            error: (e) => { console.error(e) }
+            error: (e) => console.error(e)
         }))
     }
 
@@ -82,13 +119,23 @@ export class AppState {
         return patchState({ favoriteCities: saveCityToFavorites })
     }
 
+    @Action(SelectedCity)
+    selectedCity(
+        { patchState }: StateContext<AppStateModel>,
+        { city }: SelectedCity,
+    ) {
+
+        patchState({ selectedCity: city });
+
+    }
+
     @Action(RemoveFavoriteCity)
     removeFavoriteCity(
         { patchState, getState }: StateContext<AppStateModel>,
         { key }: RemoveFavoriteCity,
     ) {
-       const {favoriteCities} = getState();
-       const newList = favoriteCities?.filter(city => city.key !== key);
+        const { favoriteCities } = getState();
+        const newList = favoriteCities?.filter(city => city.key !== key);
         return patchState({ favoriteCities: newList });
     }
 
@@ -96,5 +143,15 @@ export class AppState {
     clearCities(
         { patchState }: StateContext<AppStateModel>) {
         patchState({ cities: null })
+    }
+
+    @Action(FetchLocation)
+    fetchLocation(
+        { patchState }: StateContext<AppStateModel>,
+        { key }: FetchLocation,
+    ) {
+        return this.locationService.getLocation(key).pipe(tap((data) => {
+            patchState({ location: data })
+        }))
     }
 }

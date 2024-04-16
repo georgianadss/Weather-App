@@ -8,7 +8,8 @@
              [formControl]="userNameControl" 
              id="userName" type="text" 
              required="required"
-             [class.errors]="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched)">
+             autocomplete="off"
+             [class.errors]="userNameControl.invalid && (userNameControl.dirty || userNameControl.touched) || errorMessage">
              <app-errors [formControl]="userNameControl" [requiredMessage]="'Name is required'" [minLengthMessage]="'Name should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
         <div class="d-flex flex-column">
@@ -17,13 +18,17 @@
             [formControl]="passwordControl" 
             id="password" type="password"
             required="required"
-            [class.errors]="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
+            autocomplete="off"
+            [class.errors]="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched) || errorMessage">
             <app-errors [formControl]="passwordControl" 
             [requiredMessage]="'Password is required'" [minLengthMessage]="'Password should be at least ' +  MIN_LENGTH  + ' characters'"></app-errors>
         </div>
+        <div class="error-message font-size-14 alert" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
         <button type="submit" 
             class="btn btn-primary mt-2" 
-            [disabled]="formGroup.invalid"
-            [routerLink]="'./login'">Submit</button>
+            [disabled]="formGroup.invalid">Submit</button>
     </form>
+    <span *ngIf="loginResponse">Welcome {{loginResponse.name}}</span>
 </div>

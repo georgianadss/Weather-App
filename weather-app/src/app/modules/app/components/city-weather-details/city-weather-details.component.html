@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="flex-wrap d-flex flex-column details-container justify-content-center w-75 p-3 bg-white m-3">
+    <h6 class=" p-2 font-size-14 text-center m-0">{{ this.location?.DailyForecasts?.[0]?.Date| date:'fullDate' }}</h6>
+    <div class="d-flex  flex-wrap m-2 mt-0 flex-column">
+        <h6 class="m-0 p-2 font-size-18 fw-normal border-bottom">Day</h6>
+            <div class="d-flex flex-row me-1 align-items-center">
+                <div class="d-flex align-items-center m-0 p-2 col-6">
+                    <span class="fs-1 mb-0">{{ this.location?.DailyForecasts?.[0]?.Day?.Icon }}</span>
+                    <h6 class="font-size-30 fw-normal mb-0 ms-2"> {{ this.location?.DailyForecasts?.[0]?.Temperature?.Maximum?.UnitType }} </h6>
+                </div>
+                <div class="d-flex flex-column align-items-left col-6">
+                    <h6 class="m-0 font-size-18 pb-2 pt-2">RealFeel:</h6>
+                    <h6 class="m-0 font-size-18">RealShade:</h6>
+                </div>    
+            </div>
+            <div class="d-flex m-0 p-2">
+                <p class="">{{ this.location?.DailyForecasts?.[0]?.Day?.IconPhrase }}</p>
+            </div>
+
+                <div class="d-flex me-1 flex-row justify-content-between">
+                    <div class="d-flex flex-column col-6">
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Max UV Index</h6>
+                            <h6 class="m-0">1 low</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Wind</h6>
+                            <h6 class="m-0">WSW 7 km/h</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Wind Gusts</h6>
+                            <h6 class="m-0">19 km/h </h6>
+                        </div>   
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Probability of Precipitation</h6>
+                            <h6 class="m-0">{{ location?.DailyForecasts?.[0]?.Day?.PrecipitationIntensity }}</h6>
+                        </div> 
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Probability of Thunderstorms</h6>
+                            <h6 class="m-0">96% </h6>
+                        </div>                      
+                    </div>
+
+                    <div class="d-flex flex-column ms-2 col-6">
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Precipitation</h6>
+                            <h6 class="m-0">3.6 mm</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Rain</h6>
+                             <h6 class="m-0">3.6mm</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Hours of Precipitation</h6>
+                            <h6 class="m-0">3.5</h6>
+                        </div>   
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Hours of Rain</h6>
+                             <h6 class="m-0">3.5 </h6>
+                        </div> 
+                        <div class="d-flex justify-content-between border-bottom mb-3 p-2">
+                            <h6 class="m-0">Cloud Cover</h6>
+                        <h6 class="m-0">98% </h6>
+                        </div>                      
+                    </div>
+
+                </div>
+        </div>
+    </div>
+  

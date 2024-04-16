@@ -25,6 +25,7 @@ export class ErrorsComponent implements ControlValueAccessor  {
 
 
   value!: string;
+errorMessage: any;
 
   writeValue(value: any): void {
     this.value = value;

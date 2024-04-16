@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigService } from '../../../services/config.service';
+import { SelectedCityComponent } from '../components/selected-city/selected-city.component';
 
 
 
@@ -23,6 +24,7 @@ import { ConfigService } from '../../../services/config.service';
         RouterModule,
         HeaderComponent,
         HttpClientModule,
+        SelectedCityComponent
     ]
 })
 export class HomeComponent {

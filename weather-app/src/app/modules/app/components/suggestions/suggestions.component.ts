@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../../state/app.state';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { City, CityDetails } from '../../../models/city-data';
-import { SaveCityToFavorites } from '../../../state/app.actions';
+import { SelectedCity } from '../../../state/app.actions';
 import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
@@ -15,7 +15,6 @@ import { NotificationService } from '../../../../services/notification.service';
   styleUrls: ['./suggestions.component.scss']
 })
 export class SuggestionsComponent implements OnInit, OnDestroy {
-  [x: string]: any;
   @Select(AppState.cities) cities$!: Observable<CityDetails[]>;
 
   public cities!: CityDetails[];
@@ -26,6 +25,8 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
 
 
   constructor(private store: Store, private notify: NotificationService,) { }
+
+
 
   ngOnInit(): void {
     this.cities$.pipe(takeUntil(this.unsubscribe)).subscribe((cities) => {
@@ -45,17 +46,18 @@ export class SuggestionsComponent implements OnInit, OnDestroy {
       this.notify.fail('This city is already in your list');
       return;
     }
+
     const newCity: City = {
       key: city.Key,
       cityName: city.LocalizedName,
       postalCode: city.PrimaryPostalCode,
       regionName: city.Region.LocalizedName,
       countryName: city.Country.LocalizedName,
-      timeZone:city.TimeZone.GmtOffset,
+      timeZone: city.TimeZone.GmtOffset,
       geoPosition: city.GeoPosition.Elevation.Imperial.Value,
     }
     this.cityKey = city.Key;
-    this.store.dispatch(new SaveCityToFavorites(newCity));
+    this.store.dispatch(new SelectedCity(newCity));
   }
 
   ngOnDestroy(): void {

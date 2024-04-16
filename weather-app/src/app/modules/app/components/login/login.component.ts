@@ -4,6 +4,11 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, }
 import { ErrorsComponent } from '../errors/errors.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { Select, Store } from '@ngxs/store';
+import { FetchLoginData } from '../../../state/app.actions';
+import { Login, LoginResponse } from '../../../models/login-data';
+import { AppState } from '../../../state/app.state';
+import { Observable } from 'rxjs';
 
 interface LoginData {
   userNameControl: FormControl<string | null>;
@@ -18,7 +23,15 @@ interface LoginData {
   imports: [ FormsModule, ReactiveFormsModule, CommonModule, ErrorsComponent, RouterModule, HeaderComponent,]
 })
 export class LoginComponent implements OnInit {
+  @Select(AppState.login) login$: Observable<LoginResponse> | undefined;
+
+  public login: LoginResponse | undefined;
+
+  public loginResponse: LoginResponse | undefined;
+
   public formGroup!: FormGroup<LoginData>;
+
+  public errorMessage: string | undefined;
 
   public readonly MIN_LENGTH: number = 5;
 
@@ -30,10 +43,16 @@ export class LoginComponent implements OnInit {
     return this.formGroup.controls.passwordControl;
   }
 
+  constructor (private store: Store) {}
+
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       userNameControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]),
       passwordControl: new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH)]),
+    })
+
+    this.login$?.pipe().subscribe((response) => {
+      this.loginResponse = response;
     })
   }
 
@@ -41,7 +60,19 @@ export class LoginComponent implements OnInit {
     if(this.formGroup.invalid) {
       return;
     }
+   const login: Login = {
+    userName: this.userNameControl.value,
+    password: this.passwordControl.value,
+   }
+    this.store.dispatch(new FetchLoginData(login)).pipe().subscribe({
+      next: () => {
+        this.errorMessage = undefined;
+        this.resetForm()},
+      error: () => this.errorMessage = 'Username or password is incorrect',
+    })
+  }
 
-    console.log(this.formGroup.value);
+  resetForm() {
+    this.formGroup.reset();
   }
 }
