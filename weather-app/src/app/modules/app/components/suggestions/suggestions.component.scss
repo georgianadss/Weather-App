@@ -1,4 +1,5 @@
 @import 'variables.scss';
+@import 'layout';
 
 
 .suggestion {
@@ -18,4 +19,6 @@
     .selected-city {
         background-color: $light-white;
     }
+
+
 }

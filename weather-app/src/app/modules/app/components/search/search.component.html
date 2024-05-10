@@ -1,14 +1,8 @@
-<div class="search-form d-flex flex-column">
+<div class="search-form d-flex flex-column w-230-fixed">
     <form [formGroup]="formGroup">
-        <input 
-            [formControl]="searchControl"
-            type="search" 
-            id="nav-search" 
-            name="nav-search"
-            (keyup)="debounceChange()"
-            (input)="detectEmptySearch()"
-            class="p-0 border-0 ps-2">
+        <input [formControl]="searchControl" type="search" id="nav-search" name="nav-search" (keyup)="debounceChange()"
+            (input)="detectEmptySearch()" class="p-1 ps-3 pe-3 border-0 w-100 border-radius-5">
     </form>
     <app-suggestions></app-suggestions>
-    
+
 </div>

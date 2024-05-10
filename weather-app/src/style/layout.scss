@@ -1,12 +1,12 @@
-html, 
+html,
 body {
     height: 100%;
 }
 
 body {
-     margin: 0;
-     background-color: #ecf1ff59;
-    }
+    margin: 0;
+    background-color: #ecf1ff59;
+}
 
 .page-wrapper {
     width: 100%;
@@ -16,4 +16,12 @@ body {
 
 a {
     text-decoration: none;
+}
+
+.border-radius-5 {
+    border-radius: 5px;
+}
+
+.w-230-fixed {
+    width: 230px;
 }
